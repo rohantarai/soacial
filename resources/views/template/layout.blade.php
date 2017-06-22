@@ -47,9 +47,7 @@
                 $('#warningModal').addClass('show');
             }
 
-            $('[data-toggle=tooltip]').tooltip({
-                placement: 'bottom'
-            });
+            $('[data-toggle=tooltip]').tooltip();
         });
     </script>
 

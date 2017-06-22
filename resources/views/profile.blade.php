@@ -196,18 +196,18 @@
                                     <a id="qu" href="{{ url('https://quora.com/profile/'.$user->usersInfo->quora) }}" target="_blank"><i class="fa fa-quora fa-4x" aria-hidden="true"></i></a>
                                 @endif--}}
                                 @if($user->usersInfo->skype)
-                                    <a id="sk" data-toggle="tooltip" title="{{ $user->usersInfo->skype }}"><i class="fa fa-skype fa-4x" aria-hidden="true"></i></a>
+                                    <a id="sk" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->skype }}"><i class="fa fa-skype fa-4x" aria-hidden="true"></i></a>
                                 @endif
                                 @if($user->usersInfo->snapchat)
-                                    <a id="sc" data-toggle="tooltip" title="{{ $user->usersInfo->snapchat }}"><i class="fa fa-snapchat-square fa-4x" aria-hidden="true"></i></a>
+                                    <a id="sc" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->snapchat }}"><i class="fa fa-snapchat-square fa-4x" aria-hidden="true"></i></a>
                                 @endif
                                 @if($user->usersInfo->telegram)
-                                    <a id="te" data-toggle="tooltip" title="{{ $user->usersInfo->telegram }}"><i class="fa fa-telegram fa-4x" aria-hidden="true"></i></a>
+                                    <a id="te" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->telegram }}"><i class="fa fa-telegram fa-4x" aria-hidden="true"></i></a>
                                 @endif
                                 @if($user->usersInfo->whatsapp)
-                                    <a id="wq" data-toggle="tooltip" title="{{ $user->usersInfo->whatsapp }}"><i class="fa fa-whatsapp fa-4x" aria-hidden="true"></i></a>
+                                    <a id="wq" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->whatsapp }}"><i class="fa fa-whatsapp fa-4x" aria-hidden="true"></i></a>
                                 @endif
-                                    <a data-toggle="tooltip" title="{{ $user->email }}" style="color:#d34836;"><i class="fa fa-envelope-o fa-4x" aria-hidden="true"></i></a>
+                                    <a data-toggle="tooltip" data-placement="bottom" title="{{ $user->email }}" style="color:#d34836;"><i class="fa fa-envelope-o fa-4x" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>

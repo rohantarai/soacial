@@ -2,7 +2,6 @@
 @section('content')
 
     <div class="container">
-
         @if(session()->has('success'))
             <div class="alert alert-success" role="alert">
                 <strong> Success! </strong>{{ session()->get('success') }}
@@ -71,15 +70,15 @@
                         {{--<form id="registerForm" role="form" method="post" action="{{ route('register_user') }}">--}}
                         <div class="form-group">
                             <label class="control-label">Registration No.</label>
-                            <input class="form-control" type="text" name="regdno" title="Registration number" required>
+                            <input class="form-control" type="text" name="regdno" data-toggle="tooltip" data-placement="top" title="Reg. number can't be changed later" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label">First Name </label>
-                            <input class="form-control" type="text" name="firstname" title="First Name" required>
+                            <input class="form-control" type="text" name="firstname" data-toggle="tooltip" data-placement="top" title="First Name can't be changed later" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Last Name </label>
-                            <input class="form-control" type="text" name="lastname" title="Last Name" required>
+                            <input class="form-control" type="text" name="lastname" data-toggle="tooltip" data-placement="top" title="Last Name can't be changed later" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Gender </label> <br>
@@ -96,7 +95,7 @@
                         <div class="form-group">
                                 <div class="form-group col-md-4">
                                     <label for="Day" class="control-label">Day:</label>
-                                    <select class="form-control" name="day" id="Day">
+                                    <select class="form-control" name="day" id="Day" data-toggle="tooltip" data-placement="top" title="Date can't be changed later">
                                         <option hidden></option>
                                         <option>01</option>
                                         <option>02</option>
@@ -133,7 +132,7 @@
                                 </div>
                             <div class="form-group col-md-4">
                                 <label for="Month" class="control-label">Month:</label>
-                                <select class="form-control" name="month" id="Month">
+                                <select class="form-control" name="month" id="Month" data-toggle="tooltip" data-placement="top" title="Month can't be changed later">
                                     <option hidden></option>
                                     <option>January</option>
                                     <option>February</option>
@@ -156,7 +155,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Select Institute </label>
-                            <select class="form-control" name="institute" id="institute" title="Institute">
+                            <select class="form-control" name="institute" id="institute" data-toggle="tooltip" data-placement="top" title="Institute can't be changed later">
                                 <option hidden></option>
                                 @foreach($institutes as $institute)
                                     <option value="{{ $institute->id }}">{{ $institute->name }}</option>
@@ -166,7 +165,7 @@
                         <div class="form-group">
                             <label class="control-label">Select Programme</label>
                             <h6>(Select --Not Listed-- if Programme not available)</h6>
-                            <select class="form-control" name="programme" id="programme" title="programme">
+                            <select class="form-control" name="programme" id="programme" data-toggle="tooltip" data-placement="top" title="Programme can't be changed later">
                                 <option value=""></option>
                             </select>
                         </div>
@@ -174,11 +173,11 @@
                         <div class="form-group">
                             <div class="form-group col-md-6">
                                 <label for="YearFrom" class="control-label">From:</label>
-                                <input type="text" class="form-control" name="yearFrom" id="YearFrom" placeholder="YYYY" required>
+                                <input type="text" class="form-control" name="yearFrom" id="YearFrom" placeholder="YYYY" data-toggle="tooltip" data-placement="top" title="Year can't be changed later" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="YearTo" class="control-label">To:</label>
-                                <input type="text" class="form-control" name="yearTo" id="YearTo" placeholder="YYYY" required>
+                                <input type="text" class="form-control" name="yearTo" id="YearTo" placeholder="YYYY" data-toggle="tooltip" data-placement="top" title="Year can't be changed later" required>
                             </div>
                         </div>
                         <div class="form-group">
