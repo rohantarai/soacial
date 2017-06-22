@@ -26,50 +26,15 @@
         <div class="form-group">
             <label for="inputFirstName" class="col-md-2 control-label">First Name:</label>
             <div class="col-md-3">
-                <input type="text" value="{{ $users->first_name }}" class="form-control input-sm" name="inputFirstName" id="inputFirstName" placeholder="First Name">
+                {{--<input type="text" value="{{ $users->first_name }}" class="form-control input-sm" name="inputFirstName" id="inputFirstName" placeholder="First Name">--}}
+                <p class="form-control-static">{{ $users->first_name }}</p>
             </div>
         </div>
         <div class="form-group">
             <label for="inputLastName" class="col-md-2 control-label">Last Name:</label>
             <div class="col-md-3">
-                <input type="text" value="{{ $users->last_name }}" class="form-control input-sm" name="inputLastName" id="inputLastName" placeholder="Last Name">
-            </div>
-        </div>
-        <div class="row">
-            <label for="inputYear1" class="col-md-2 col-sm-3 col-xs-12 control-label">Academic Year:</label>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="form-group">
-                    <label for="inputYear1" class="col-md-3 control-label">From:</label>
-                    <div class="col-md-6">
-                        <input type="text" value="{{ $users->usersInfo->academicYear_from }}" class="form-control input-sm" name="inputYear1" id="inputYear1" placeholder="YYYY">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="form-group">
-                    <label for="inputYear2" class="col-md-2 control-label">To:</label>
-                    <div class="col-md-6">
-                        <input type="text" value="{{ $users->usersInfo->academicYear_to }}" class="form-control input-sm"  name="inputYear2" id="inputYear2" placeholder="YYYY">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputHighSchool" class="col-md-2 control-label">High School:</label>
-            <div class="col-md-6">
-                <input type="text" value="{{ $users->usersInfo->high_school }}" class="form-control input-sm" name="inputHighSchool" id="inputHighSchool" placeholder="High School">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputCurrentCity" class="col-md-2 control-label">Current City:</label>
-            <div class="col-md-3">
-                <input type="text" value="{{ $users->usersInfo->current_city }}" class="form-control input-sm" name="inputCurrentCity" id="inputCurrentCity" placeholder="Current City">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputHometown" class="col-md-2 control-label">Hometown:</label>
-            <div class="col-md-3">
-                <input type="text" value="{{ $users->usersInfo->hometown }}" class="form-control input-sm" name="inputHometown" id="inputHometown" placeholder="Hometown">
+                {{--<input type="text" value="{{ $users->last_name }}" class="form-control input-sm" name="inputLastName" id="inputLastName" placeholder="Last Name">--}}
+                <p class="form-control-static">{{ $users->last_name }}</p>
             </div>
         </div>
         <div class="row">
@@ -78,7 +43,8 @@
                 <div class="form-group">
                     <label for="inputDay" class="col-md-2 col-sm-2 control-label">Day:</label>
                     <div class="col-md-5 col-sm-10 col-xs-11">
-                        <select class="form-control input-sm" name="inputDay" id="inputDay">
+                        <p class="form-control-static">{{ $users->usersInfo->born_day }}</p>
+                        {{--<select class="form-control input-sm" name="inputDay" id="inputDay">
                             <option selected>{{ $users->usersInfo->born_day }}</option>
                             <option>01</option>
                             <option>02</option>
@@ -111,7 +77,7 @@
                             <option>29</option>
                             <option>30</option>
                             <option>31</option>
-                        </select>
+                        </select>--}}
                     </div>
                 </div>
             </div>
@@ -119,7 +85,8 @@
                 <div class="form-group">
                     <label for="inputMonth" class="col-md-3 control-label">Month:</label>
                     <div class="col-md-8">
-                        <select class="form-control input-sm" name="inputMonth" id="inputMonth">
+                        <p class="form-control-static">{{ $users->usersInfo->born_month }}</p>
+                        {{--<select class="form-control input-sm" name="inputMonth" id="inputMonth">
                             <option selected>{{ $users->usersInfo->born_month }}</option>
                             <option>January</option>
                             <option>February</option>
@@ -133,7 +100,7 @@
                             <option>October</option>
                             <option>November</option>
                             <option>December</option>
-                        </select>
+                        </select>--}}
                     </div>
                 </div>
             </div>
@@ -144,6 +111,45 @@
                         <input type="text" value="{{ $users->usersInfo->born_year }}" class="form-control input-sm" name="inputYear" id="inputYear" placeholder="YYYY">(optional)
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="inputYear1" class="col-md-2 col-sm-3 col-xs-12 control-label">Academic Year:</label>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="form-group">
+                    <label for="inputYear1" class="col-md-3 control-label">From:</label>
+                    <div class="col-md-6">
+                        {{--<input type="text" value="{{ $users->usersInfo->academicYear_from }}" class="form-control input-sm" name="inputYear1" id="inputYear1" placeholder="YYYY">--}}
+                        <p class="form-control-static">{{ $users->usersInfo->academicYear_from }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="form-group">
+                    <label for="inputYear2" class="col-md-2 control-label">To:</label>
+                    <div class="col-md-6">
+                        {{--<input type="text" value="{{ $users->usersInfo->academicYear_to }}" class="form-control input-sm"  name="inputYear2" id="inputYear2" placeholder="YYYY">--}}
+                        <p class="form-control-static">{{ $users->usersInfo->academicYear_to }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputHighSchool" class="col-md-2 control-label">High School:</label>
+            <div class="col-md-6">
+                <input type="text" value="{{ $users->usersInfo->high_school }}" class="form-control input-sm" name="inputHighSchool" id="inputHighSchool" placeholder="High School">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputCurrentCity" class="col-md-2 control-label">Current City:</label>
+            <div class="col-md-3">
+                <input type="text" value="{{ $users->usersInfo->current_city }}" class="form-control input-sm" name="inputCurrentCity" id="inputCurrentCity" placeholder="Current City">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputHometown" class="col-md-2 control-label">Hometown:</label>
+            <div class="col-md-3">
+                <input type="text" value="{{ $users->usersInfo->hometown }}" class="form-control input-sm" name="inputHometown" id="inputHometown" placeholder="Hometown">
             </div>
         </div>
         <div class="form-group">
