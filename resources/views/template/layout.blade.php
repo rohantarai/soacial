@@ -125,6 +125,7 @@
                         <li>Do not misuse any information about any person you read.</li>
                         <li>Do not put pornographic photo as your profile picture.</li>
                         <li>Do not put abusive words in your personal information.</li>
+                        <li>If you want to change or update your information that are unchangeable, kindly contact us.</li>
                     </ul>
                 </div>
                 <div class="modal-footer">
