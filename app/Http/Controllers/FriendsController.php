@@ -18,7 +18,7 @@ class FriendsController extends Controller
             ->with(['approvedRequests','institutes', 'usersInfo' => function ($query) {
                 $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
             }])
-            ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender')
+            ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender','friend_user.updated_at')
             ->where('users.verified', 1)
             ->where('users.reg_no', '!=', Auth::user()->reg_no)
             ->where(function ($query) {
