@@ -1,5 +1,4 @@
 @extends('template.layout')
-@include('template.navbar')
 @section('content')
 
     <div class="col-md-12">
