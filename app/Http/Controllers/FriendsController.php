@@ -16,7 +16,7 @@ class FriendsController extends Controller
                     ->orOn('users.id', '=', 'friend_user.friend_id');
             })
             ->with(['approvedRequests','institutes', 'usersInfo' => function ($query) {
-                $query->select('usersInfo.user_regno', 'usersInfo.academicYear_from', 'usersInfo.academicYear_to', 'usersInfo.avatar');
+                $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
             }])
             ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender')
             ->where('users.verified', 1)
@@ -40,7 +40,7 @@ class FriendsController extends Controller
                     ->orOn('users.id', '=', 'friend_user.friend_id');
             })
             ->with(['approvedRequests','institutes', 'usersInfo' => function ($query) {
-                $query->select('usersInfo.user_regno', 'usersInfo.academicYear_from', 'usersInfo.academicYear_to', 'usersInfo.avatar');
+                $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
             }])
             ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender')
             ->where('users.verified', 1)
@@ -61,7 +61,7 @@ class FriendsController extends Controller
                     ->orOn('users.id', '=', 'friend_user.friend_id');
             })
             ->with(['approvedRequests','institutes', 'usersInfo' => function ($query) {
-                $query->select('usersInfo.user_regno', 'usersInfo.academicYear_from', 'usersInfo.academicYear_to', 'usersInfo.avatar');
+                $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
             }])
             ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender')
             ->where('users.verified', 1)

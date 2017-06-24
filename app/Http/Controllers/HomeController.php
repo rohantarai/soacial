@@ -33,22 +33,22 @@ class HomeController extends Controller
         $interests = Interest::orderBy('id')->get();
 
         // GETS ALL years NAME AS AN ARRAY TO DISPLAY ON HOME PAGE
-        $years = UsersInfo::join('users', 'usersInfo.user_regno','=','users.reg_no')
-            ->select('usersInfo.academicYear_to')
+        $years = UsersInfo::join('users', 'usersinfo.user_regno','=','users.reg_no')
+            ->select('usersinfo.academicYear_to')
             ->distinct()
             ->where('users.verified',1)
-            ->orderBy('usersInfo.academicYear_to','desc')
+            ->orderBy('usersinfo.academicYear_to','desc')
             ->get();
 
 
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersinfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 /*->join('friend_user', 'users.id', '=', 'friend_user.user_id')*/
                 /*->join('friend_user', function ($join) {
                     $join->on('users.id', '=', 'friend_user.user_id')
                         ->orOn('users.id', '=', 'friend_user.friend_id');
                 })*/
                 ->with(['pendingRequests','approvedRequests','institutes', 'usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno', 'usersInfo.academicYear_from', 'usersInfo.academicYear_to', 'usersInfo.avatar');
+                    $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
                 }])
                 ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender')
                 ->where('users.verified', 1)
@@ -65,7 +65,7 @@ class HomeController extends Controller
                     return $query->where('users.institute', $request->input('institute'));
                 })
                 ->when($request->input('year'), function ($query) use ($request) {
-                    return $query->where('usersInfo.academicYear_to', $request->input('year'));
+                    return $query->where('usersinfo.academicYear_to', $request->input('year'));
                 })
                 ->when($request->input('interest'), function ($query) use ($request) {
                     $query->join('interest_user', 'users.id', '=', 'interest_user.user_id');
@@ -73,7 +73,7 @@ class HomeController extends Controller
                 })
                 ->distinct()
                 ->orderBy('users.first_name')
-                ->paginate(20);
+                ->paginate(8);
 
         //Finding Mutual Friends between the present user and auth user
 
@@ -84,7 +84,7 @@ class HomeController extends Controller
                 ->orOn('users.id', '=', 'friend_user.friend_id');
         })
             ->with(['usersInfo'  => function ($query) {
-                $query->select('usersInfo.id','usersInfo.user_regno', 'usersInfo.avatar');
+                $query->select('usersinfo.id','usersinfo.user_regno', 'usersinfo.avatar');
             }])
             ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender')
             ->where(function ($query) use ($users){
@@ -103,7 +103,7 @@ class HomeController extends Controller
         /*foreach($users as $user)
         {
             $this->presentUserFriends[] = $user->with(['usersInfo'  => function ($query) {
-                $query->select('usersInfo.user_regno','usersInfo.avatar');
+                $query->select('usersinfo.user_regno','usersinfo.avatar');
             }])
                 ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender')
                 ->join('friend_user', function ($join) {
@@ -122,7 +122,7 @@ class HomeController extends Controller
 
         //filtering out auth user's friends
         $authUserFriends = Auth::user()->with(['usersInfo'  => function ($query) {
-                                $query->select('usersInfo.user_regno','usersInfo.avatar');
+                                $query->select('usersinfo.user_regno','usersinfo.avatar');
                             }])
                             ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender')
                             ->join('friend_user', function ($join) {
@@ -177,9 +177,9 @@ class HomeController extends Controller
         // THIS SECTION WILL EXECUTE IF NO PARAMETERS IS PRESENT OR THE PARAMETERS ARE null
         /*if(!$request->all() || (!$request->input('alpha') && !$request->input('institute') && !$request->input('year') && !$request->input('interest')))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
@@ -191,9 +191,9 @@ class HomeController extends Controller
         /*// THIS SECTION WILL EXECUTE IF PARAMETER IS ONLY 'alpha'
         if($request->input('alpha'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
@@ -206,9 +206,9 @@ class HomeController extends Controller
         // THIS SECTION WILL EXECUTE IF PARAMETER IS ONLY 'alpha & institute'
         if($request->input('alpha') && $request->input('institute'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
@@ -224,9 +224,9 @@ class HomeController extends Controller
         // THIS SECTION WILL EXECUTE IF PARAMETER IS ONLY 'institute'
         if($request->input('institute'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
@@ -239,14 +239,14 @@ class HomeController extends Controller
         // THIS SECTION WILL EXECUTE IF PARAMETER IS ONLY 'year'
         if($request->input('year'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
                 ->where('users.reg_no','!=',Auth::user()->reg_no)
-                ->where('usersInfo.academicYear_to', $request->input('year'))
+                ->where('usersinfo.academicYear_to', $request->input('year'))
                 ->inRandomOrder()
                 ->paginate(8);
         }
@@ -254,10 +254,10 @@ class HomeController extends Controller
         // THIS SECTION WILL EXECUTE IF PARAMETER IS ONLY 'interest'
         if($request->input('interest'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->join('interest_user', 'users.id', '=', 'interest_user.user_id')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
@@ -270,9 +270,9 @@ class HomeController extends Controller
         // THIS SECTION WILL EXECUTE IF PARAMETER IS ONLY 'alpha' WITH OTHER PARAMETERS AS null
         if($request->input('alpha') && !$request->input('interest') && !$request->input('year') && !$request->input('institute'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
@@ -285,10 +285,10 @@ class HomeController extends Controller
 
         if($request->input('alpha') && $request->input('interest') && !$request->input('year') && !$request->input('institute'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->join('interest_user', 'users.id', '=', 'interest_user.user_id')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
@@ -301,9 +301,9 @@ class HomeController extends Controller
                 ->paginate(8);
 
             $users = Interest::find($request->input('interest'))
-                ->users()->join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+                ->users()->join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->with(['institutes','usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno','usersInfo.academicYear_from','usersInfo.academicYear_to','usersInfo.avatar');
+                    $query->select('usersinfo.user_regno','usersinfo.academicYear_from','usersinfo.academicYear_to','usersinfo.avatar');
                 }])
                 ->select('users.reg_no','users.first_name','users.last_name','users.institute','users.gender')
                 ->where('users.verified',1)
@@ -315,10 +315,10 @@ class HomeController extends Controller
 
         if($request->input('alpha') && $request->input('interest') && $request->input('year') && !$request->input('institute'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->join('interest_user', 'users.id', '=', 'interest_user.user_id')
                 ->with(['institutes', 'usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno', 'usersInfo.academicYear_from', 'usersInfo.academicYear_to', 'usersInfo.avatar');
+                    $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
                 }])
                 ->select('interest_user.user_id', 'users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender', 'users.remember_token')
                 ->where('users.verified', 1)
@@ -326,7 +326,7 @@ class HomeController extends Controller
                 ->where(function ($query) use ($request) {
                     $query->where('users.first_name', 'LIKE', "{$request->input('alpha')}%");
                     $query->where('interest_user.interest_id', $request->input('interest'));
-                    $query->where('usersInfo.academicYear_to', $request->input('year'));
+                    $query->where('usersinfo.academicYear_to', $request->input('year'));
                 })
                 ->inRandomOrder()
                 ->paginate(8);
@@ -334,10 +334,10 @@ class HomeController extends Controller
 
         if($request->input('alpha') && $request->input('interest') && $request->input('year') && $request->input('institute'))
         {
-            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+            $users = User::join('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 ->join('interest_user', 'users.id', '=', 'interest_user.user_id')
                 ->with(['institutes', 'usersInfo' => function ($query) {
-                    $query->select('usersInfo.user_regno', 'usersInfo.academicYear_from', 'usersInfo.academicYear_to', 'usersInfo.avatar');
+                    $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
                 }])
                 ->select('interest_user.user_id', 'users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender', 'users.remember_token')
                 ->where('users.verified', 1)
@@ -345,7 +345,7 @@ class HomeController extends Controller
                 ->where(function ($query) use ($request) {
                     $query->where('users.first_name', 'LIKE', "{$request->input('alpha')}%");
                     $query->where('interest_user.interest_id', $request->input('interest'));
-                    $query->where('usersInfo.academicYear_to', $request->input('year'));
+                    $query->where('usersinfo.academicYear_to', $request->input('year'));
                     $query->where('users.institute', $request->input('institute'));
                 })
                 ->inRandomOrder()
@@ -471,7 +471,7 @@ class HomeController extends Controller
                             ->orWhere('last_name',$request->input('query'))
                             ->orWhere(DB::raw("CONCAT_WS(' ',first_name,last_name)"),$request->input('query'));
                     })
-                    ->leftJoin('usersInfo', 'users.reg_no', '=', 'usersInfo.user_regno')
+                    ->leftJoin('usersInfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                     ->orderBy('academicYear_to','desc')
                     ->paginate(4);
 

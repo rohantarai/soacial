@@ -29,7 +29,7 @@ class ProfileController extends Controller
 
         //filtering out present user's friends
         $presentUserFriends = $user->with(['usersInfo'  => function ($query) {
-                            $query->select('usersInfo.user_regno','usersInfo.avatar');
+                            $query->select('usersinfo.user_regno','usersinfo.avatar');
                         }])
                         ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender')
                         ->join('friend_user', function ($join) {
@@ -46,7 +46,7 @@ class ProfileController extends Controller
 
         //filtering out auth user's friends
         $authUserFriends = Auth::user()->with(['usersInfo'  => function ($query) {
-                                $query->select('usersInfo.user_regno','usersInfo.avatar');
+                                $query->select('usersinfo.user_regno','usersinfo.avatar');
                             }])
                             ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender')
                             ->join('friend_user', function ($join) {
