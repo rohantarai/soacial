@@ -22,6 +22,11 @@ class WelcomeController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
+    public function accountActivated()
+    {
+        return view('template.activated');
+    }
     
     public function index()
     {
@@ -113,16 +118,16 @@ class WelcomeController extends Controller
             if ($user_token->verified == 1) {
 
                 // if verified is true then redirect and return Already Activated message
-                return redirect('/')->with('success', 'Already Activated');
+                return redirect('/activated')->with('success', 'Already Activated');
             }
 
             // else find the token and verify it by calling 'hasVerified' method from User model
             User::whereToken($token)->first()->hasVerified();
 
-            return redirect('/')->with('success','Account Activated. You can Login now');
+            return redirect('/activated')->with('success','Account Activated. You can Login now');
         }
         //return error if user_token is null
-        return redirect('/')->with('error','Invalid link');
+        return redirect('/activated')->with('error','Invalid link');
     }
 
     public function login(Request $request)

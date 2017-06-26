@@ -1,17 +1,6 @@
 @extends('template.layout')
 @section('content')
 
-    <div class="container">
-        @if(session()->has('success'))
-            <div class="alert alert-success" role="alert">
-                <strong> Success! </strong>{{ session()->get('success') }}
-            </div>
-            @elseif(session()->has('error'))
-            <div class="alert alert-danger" role="alert">
-                <strong> Error! </strong>{{ session()->get('error') }}
-            </div>
-        @endif
-    </div>
     <div class="background">
         <div class="container">
             <div class="jumbotron text-center" style="margin-top:100px; opacity: 0.8;">
