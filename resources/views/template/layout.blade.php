@@ -10,14 +10,13 @@
 
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/jquery.guillotine.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/notify.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/loading-bar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/loading.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
+    {{--<link rel="stylesheet" href="{{ asset('/css/loading-bar.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/loading.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('/css/bootstrap-tagsinput.css') }}">--}}
@@ -29,11 +28,11 @@
     <script src="{{ asset('/js/jquery.guillotine.min.js') }}"></script>
     <script src="{{ asset('/js/notify.js') }}"></script>
     <script src="{{ asset('/js/select2.min.js') }}"></script>
-    <script src="{{ asset('/js/loading-bar.js') }}"></script>
     <script src="{{ asset('/js/custom.js') }}"></script>
+    {{--<script src="{{ asset('/js/loading-bar.js') }}"></script>--}}
     {{--<script src="{{ asset('/js/jquery-ui.min.js') }}"></script>--}}
-    {{--<script src="{{ asset('/js/jquery.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>--}}
+    {{--<script src="{{ asset('/js/jquery.min.js') }}"></script>--}}
+    {{--<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>--}}
     {{--<script src="{{ asset('/js/bootstrap-tagsinput.js') }}"></script>--}}
     {{--<script src="{{ asset('js/bootstrap-multiselect.js') }}"></script>--}}
 
