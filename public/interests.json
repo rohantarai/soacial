@@ -21,5 +21,6 @@
 	{"text": "Basketball", "value" : "20"},
 	{"text": "Football", "value" : "21"},
 	{"text": "Social", "value" : "22"},
-	{"text": "Travelling", "value" : "23"}
+	{"text": "Travelling", "value" : "23"},
+	{"text": "Foodie", "value" : "24"}
 ]
