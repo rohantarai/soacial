@@ -27,10 +27,10 @@ class EditProfileController extends Controller
     public function updateProfile(Request $request)
     {
         Validator::make($request->all(), [
-            'inputFirstName'    => 'required|regex:/^[A-Za-z., _-]+$/|min:2|max:25',
+            /*'inputFirstName'    => 'required|regex:/^[A-Za-z., _-]+$/|min:2|max:25',
             'inputLastName'     => 'required|regex:/^[A-Za-z., _-]+$/|min:2|max:25',
             'inputYear1'        => 'required|digits:4',
-            'inputYear2'        => 'required|digits:4',
+            'inputYear2'        => 'required|digits:4',*/
             'inputHighSchool'   => 'regex:/^[A-Za-z. -]+$/|max:100',
             'inputCurrentCity'  => 'regex:/^[A-Za-z., -]+$/|max:50',
             'inputHometown'     => 'regex:/^[A-Za-z., -]+$/|max:50',
@@ -52,12 +52,12 @@ class EditProfileController extends Controller
             'Quora'             => 'regex:/^[A-Za-z0-9._-]+$/',
 
         ],[
-            'inputFirstName.min'      => 'First Name should be minimum 2 characters',
+            /*'inputFirstName.min'      => 'First Name should be minimum 2 characters',
             'inputFirstName.max'      => 'First Name should not exceed 20 characters',
             'inputLastName.min'       => 'Last Name should be minimum 2 characters',
             'inputLastName.max'       => 'Last Name should not exceed 20 characters',
             'inputYear1.required'     => 'Academic Year From & To is required',
-            'inputYear2.required'     => 'Academic Year From & To is required',
+            'inputYear2.required'     => 'Academic Year From & To is required',*/
             'inputHighSchool.max'     => 'High School name should not exceed 100 characters',
             'inputCurrentCity.max'    => 'Current City name should not exceed 50 characters',
             'inputHometown.max'       => 'Home Town name should not exceed 50 characters',
@@ -72,16 +72,16 @@ class EditProfileController extends Controller
         /*dd($request->all());*/
 
         $user = Auth::user();
-        $user->first_name   = title_case(strtolower($request->input('inputFirstName')));
-        $user->last_name    = title_case(strtolower($request->input('inputLastName')));
 
+        /*$user->first_name   = title_case(strtolower($request->input('inputFirstName')));
+        $user->last_name    = title_case(strtolower($request->input('inputLastName')));
         $user->usersInfo->academicYear_from = $request->input('inputYear1');
-        $user->usersInfo->academicYear_to   = $request->input('inputYear2');
+        $user->usersInfo->academicYear_to   = $request->input('inputYear2');*/
         $user->usersInfo->high_school       = $request->input('inputHighSchool');
         $user->usersInfo->current_city      = ucfirst($request->input('inputCurrentCity'));
         $user->usersInfo->hometown          = ucfirst($request->input('inputHometown'));
-        $user->usersInfo->born_day          = $request->input('inputDay');
-        $user->usersInfo->born_month        = $request->input('inputMonth');
+        /*$user->usersInfo->born_day          = $request->input('inputDay');
+        $user->usersInfo->born_month        = $request->input('inputMonth');*/
         $user->usersInfo->born_year         = $request->input('inputYear');
         $user->usersInfo->relationship      = $request->input('inputRelationshipStatus');
         $user->usersInfo->quotes            = $request->input('inputQuotes');
