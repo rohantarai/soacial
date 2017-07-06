@@ -5,9 +5,11 @@
             <div class="col-md-3">
                 <div class="thumbnail">
                     @if(!is_null($user->usersInfo->avatar))
-                        <a href="{{ asset('/uploads/avatars/'.$user->usersInfo->user_regno.'/'.$user->usersInfo->avatar) }}" target="_blank">
-                        <img src="{{ asset('/uploads/avatars/'.$user->usersInfo->user_regno.'/'.$user->usersInfo->avatar) }}"/>
-                        </a>
+                        @if($user->approvedRequests->contains(Auth::user()->id) || Auth::user()->approvedRequests->contains($user->id) || Auth::user()->reg_no == $user->reg_no)
+                        <a href="#"><img class="dp" src="{{ asset('/uploads/avatars/'.$user->usersInfo->user_regno.'/'.$user->usersInfo->avatar) }}"/></a>
+                        @elser
+                            <img src="{{ asset('/uploads/avatars/'.$user->usersInfo->user_regno.'/'.$user->usersInfo->avatar) }}"/>
+                        @endif
                     @elseif($user->gender == 'Male')
                         <img src="{{ asset('/uploads/avatars/default_male.jpg') }}"/>
                     @else
@@ -23,7 +25,7 @@
 
                 </div>
                 @if(!Auth::user()->pendingRequests->contains($user->id) && !$user->pendingRequests->contains(Auth::user()->id) && !$user->approvedRequests->contains(Auth::user()->id) && !Auth::user()->approvedRequests->contains($user->id))
-                    @if(Auth::user()->remember_token != $user->remember_token)
+                    @if(Auth::user()->reg_no != $user->reg_no)
                     <a href="{{ route('addFriend',['regno' => $user->reg_no]) }}" class="btn btn-default btn-xs friendBtn" role="button" style="border-radius:50px">
                         <i class="fa fa-user-plus" aria-hidden="true"></i> Add Friend
                     </a>
@@ -56,7 +58,7 @@
                         </ul>
                     </div>
                 @endif
-            @if(Auth::user()->remember_token == $user->remember_token)
+            @if(Auth::user()->reg_no == $user->reg_no)
                 <button type="button" class="btn btn-primary btn-xs" id="updatePhotoBtn" data-toggle="modal" data-target="#myModalAvatar" style="border-radius:50px">Update Photo</button>
             @else
                     @if(count($mutualFriends) != 0)
@@ -85,7 +87,7 @@
                         <li> <a href="#photos" data-toggle="tab"><strong>Photos</strong></a></li>
                         <li> <a href="#contact" data-toggle="tab"><strong>Social</strong></a></li>
                     </ul>
-                    @if(Auth::user()->approvedRequests->contains($user->id) || $user->approvedRequests->contains(Auth::user()->id) || Auth::user()->remember_token == $user->remember_token)
+                    @if(Auth::user()->approvedRequests->contains($user->id) || $user->approvedRequests->contains(Auth::user()->id) || Auth::user()->reg_no == $user->reg_no)
                     <div class="tab-content">
                         <div id="about" class="tab-pane fade in active">
                             <div class="container-fluid">
@@ -161,14 +163,16 @@
                         <div id="photos" class="tab-pane fade">
                             <div class="row">
                                 {{--<a class="btn btn-info btn-xs" role="button" href="#" id="position">Upload </a>--}}
-                                @if(Auth::user()->remember_token == $user->remember_token)
+                                @if(Auth::user()->reg_no == $user->reg_no)
                                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#deletePhoto" style="margin-top:10px; border-radius:50px">Delete Photo</button>
                                 @endif
                             </div>
                             <div class="row" style="display:flex; flex-wrap: wrap; margin-top:10px;">
+                                <div class="album">
                                 @foreach($images as $image)
-                                <a href="{{ asset("$image") }}" target="_blank" class="col-md-2 col-xs-4 thumbnail" > <img src="{{ asset("$image") }}" class="img-responsive" /></a>
+                                        <a href="#"><img src="{{ asset("$image") }}" class="col-md-2 col-xs-4 thumbnail" /></a>
                                 @endforeach
+                                </div>
                             </div>
                         </div>
                         <div id="contact" class="tab-pane fade">
@@ -361,4 +365,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.album').viewer({
+                title: false,
+                movable: false,
+                maxZoomRatio: 10
+            });
+
+            $('.dp').viewer({
+                title: false,
+                movable: false,
+                maxZoomRatio: 10
+            });
+        });
+    </script>
 @endsection
