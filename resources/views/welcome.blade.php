@@ -4,7 +4,7 @@
     <div class="background">
         <div class="container">
             <div class="jumbotron text-center" style="margin-top:100px; opacity: 0.8;">
-                <h1>Soacial</h1>
+                <h1>SOAcial</h1>
                 <p>Explore and Discover New Friends in SOA University</p>
             </div>
         </div>
