@@ -9,9 +9,9 @@
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <ul class="nav nav-pills nav-stacked text-center">
-                    <li><a href="{{ url('/allfriends') }}">All Friends <span class="badge">{{ $countFriends }}</span></a></li>
-                    <li><a href="{{ url('/pendingfriends') }}">Requests Pending <span class="badge">{{ $countPendingFriends }}</span></a></li>
-                    <li><a href="{{ url('/requestedfriends') }}">Requests Sent <span class="badge">{{ $countRequestedFriends }}</span></a></li>
+                    <li><a href="{{ url('/allfriends') }}">All Friends <span class="badge">@if($countFriends){{ $countFriends }}@endif</span></a></li>
+                    <li><a href="{{ url('/pendingfriends') }}">Requests Pending <span class="badge">@if($countPendingFriends){{ $countPendingFriends }}@endif</span></a></li>
+                    <li><a href="{{ url('/requestedfriends') }}">Requests Sent <span class="badge">@if($countRequestedFriends){{ $countRequestedFriends }}@endif</span></a></li>
                 </ul>
             </div>
         </div>
