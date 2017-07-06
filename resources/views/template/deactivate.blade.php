@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="container-fluid">
             <div class="jumbotron text-center">
-                <h1>Are you sure to <section>Deactivate</section> your account?</h1>
+                <h2>Are you sure to <section>Deactivate</section> your account?</h2>
                 <form action="{{ route('deactivateAccount',['regno' => Auth::user()->reg_no]) }}" method="post" id="deactivateAccount">
                     <input type="hidden" name="deactivate" value="{{ request()->input('deactivate') }}">
                     <button class="btn btn-danger" value="1">Yes</button>
