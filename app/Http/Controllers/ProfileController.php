@@ -21,7 +21,7 @@ class ProfileController extends Controller
         ]);
 
         $user = User::with('usersInfo','institutes','programmes')
-                    ->select('id','reg_no','first_name','last_name','gender','institute','programme','email','remember_token')
+                    ->select('id','reg_no','first_name','last_name','gender','institute','programme','email')
                     ->where('reg_no',$request->regno)
                     ->first();
 

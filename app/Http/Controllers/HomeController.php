@@ -320,7 +320,7 @@ class HomeController extends Controller
                 ->with(['institutes', 'usersInfo' => function ($query) {
                     $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
                 }])
-                ->select('interest_user.user_id', 'users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender', 'users.remember_token')
+                ->select('interest_user.user_id', 'users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender')
                 ->where('users.verified', 1)
                 ->where('users.reg_no', '!=', Auth::user()->reg_no)
                 ->where(function ($query) use ($request) {
@@ -339,7 +339,7 @@ class HomeController extends Controller
                 ->with(['institutes', 'usersInfo' => function ($query) {
                     $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
                 }])
-                ->select('interest_user.user_id', 'users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender', 'users.remember_token')
+                ->select('interest_user.user_id', 'users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender')
                 ->where('users.verified', 1)
                 ->where('users.reg_no', '!=', Auth::user()->reg_no)
                 ->where(function ($query) use ($request) {
