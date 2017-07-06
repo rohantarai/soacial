@@ -9,32 +9,35 @@
     <title>Soacial</title>
 
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/imageviewer/0.5.1/viewer.min.css">
     <link rel="stylesheet" href="{{ asset('/css/jquery.guillotine.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/notify.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/imageviewer/0.5.1/viewer.min.css">
     <link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
+    {{--<link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('/css/loading-bar.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/loading.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}">--}}
-    {{--<link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('/css/bootstrap-tagsinput.css') }}">--}}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{{ asset('/js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="{{ asset('/js/bootstrap-typeahead.min.js') }}"></script>
     <script src="{{ asset('/js/jquery.guillotine.min.js') }}"></script>
     <script src="{{ asset('/js/notify.js') }}"></script>
-    <script src="{{ asset('/js/select2.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/imageviewer/0.5.1/viewer.min.js"></script>
     <script src="{{ asset('/js/custom.js') }}"></script>
+    {{--<script src="{{ asset('/js/jquery-3.2.1.min.js') }}"></script>--}}
+    {{--<script src="{{ asset('/js/select2.min.js') }}"></script>--}}
     {{--<script src="{{ asset('/js/loading-bar.js') }}"></script>--}}
-    {{--<script src="{{ asset('/js/jquery-ui.min.js') }}"></script>--}}
-    {{--<script src="{{ asset('/js/jquery.min.js') }}"></script>--}}
-    {{--<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>--}}
     {{--<script src="{{ asset('/js/bootstrap-tagsinput.js') }}"></script>--}}
     {{--<script src="{{ asset('js/bootstrap-multiselect.js') }}"></script>--}}
+    {{--<script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>--}}
 
     <script>
         $(document).ready(function() {
@@ -142,7 +145,7 @@
                 </div>
                 <div class="modal-body">
                     <ul>
-                        <li>Do not create password which is same in your other social networks.</li>
+                        <li>Do not create password which is same in your other social accounts.</li>
                         <li>Do not accept/send friend request if you feel suspicious or doubtful.</li>
                         <li>Your personal information won't be shared or viewed unless you or the other person accepts the friend request.</li>
                         <li>For Register and Login, use your personal devices only.</li>
