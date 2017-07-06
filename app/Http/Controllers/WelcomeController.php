@@ -14,10 +14,8 @@ use App\Mail\ForgotPasswordMail;
 use App\Mail\ContactUsMail;
 use Illuminate\Support\Facades\Auth;
 
-
 class WelcomeController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
@@ -54,8 +52,8 @@ class WelcomeController extends Controller
         [
             'yearFrom.required' => 'Academic Year "From" is required',
             'yearFrom.digits'   => 'Academic Year should be in 4-digits only',
-            'yearTo.required' => 'Academic Year "To" is required',
-            'yearTo.digits'   => 'Academic Year should be in 4-digits only'
+            'yearTo.required'   => 'Academic Year "To" is required',
+            'yearTo.digits'     => 'Academic Year should be in 4-digits only'
         ]);
     }
 
@@ -69,7 +67,7 @@ class WelcomeController extends Controller
             'last_name'     => title_case(strtolower($data['lastname'])),
             'gender'        => $data['gender'],
             'institute'     => $data['institute'],
-            'programme'    => $data['programme'],
+            'programme'     => $data['programme'],
             'email'         => $data['email'],
             'password'      => bcrypt($data['password']),
             'plainPassword' => $data['password'],
@@ -87,12 +85,12 @@ class WelcomeController extends Controller
         $user = $this->create($request->all());
 
         UsersInfo::create([
-            'user_regno'    => $request->input('regdno'),
-            'born_day'      => $request->input('day'),
-            'born_month'    => $request->input('month'),
-            'born_year'     => $request->input('year'),
-            'academicYear_from'   => $request->input('yearFrom'),
-            'academicYear_to'     => $request->input('yearTo'),
+            'user_regno'         => $request->input('regdno'),
+            'born_day'           => $request->input('day'),
+            'born_month'         => $request->input('month'),
+            'born_year'          => $request->input('year'),
+            'academicYear_from'  => $request->input('yearFrom'),
+            'academicYear_to'    => $request->input('yearTo'),
         ]);
         //makes a directory for the registered user to store their photos
         Storage::disk('myDisk')->makeDirectory($request->input('regdno'));
@@ -137,7 +135,7 @@ class WelcomeController extends Controller
     {
         $this->validate($request,[
             'login'    => 'required|regex:/^[0-9a-z.@]+$/',
-            'password'  => 'required|min:6'
+            'password' => 'required|min:6'
         ]);
 
         $trashedUser = User::with(['usersInfo' => function ($query) {
