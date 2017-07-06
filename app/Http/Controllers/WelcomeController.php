@@ -97,6 +97,9 @@ class WelcomeController extends Controller
         //makes a directory for the registered user to store their photos
         Storage::disk('myDisk')->makeDirectory($request->input('regdno'));
 
+        // For Linux Only
+        //chmod(public_path('uploads/avatars/'.$request->input('regdno').'/'), 0776);
+
         // send confirmation mail to the newly created user instance object
         Mail::send(new ConfirmationMail($user->email,$user->token));
 
