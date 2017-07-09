@@ -137,7 +137,7 @@ class WelcomeController extends Controller
     {
         $this->validate($request,[
             'login'    => 'required|regex:/^[0-9a-z.@]+$/',
-            'password'  => 'required|min:6',
+            'password' => 'required|min:6',
             'g-recaptcha-response' => 'required|captcha'
         ],
         [
@@ -256,20 +256,20 @@ class WelcomeController extends Controller
             'senderName'  => 'required|regex:/^[a-zA-Z .,]+$/',
             'senderEmail' => 'required|email|regex:/^[0-9a-z.@]+$/',
             'subject'     => 'required|regex:/^[0-9a-zA-Z .,_()@!:&-\\/]+$/|max:100',
-            'messages'     => 'required|regex:/^[0-9a-zA-Z !@#&*?()-_+:,.\\/]+$/|max:500',
+            'messages'    => 'required|regex:/^[0-9a-zA-Z !@#&*?()-_+:,.\\/]+$/|max:500',
             'g-recaptcha-response' => 'required|captcha'
         ],
         [
-            'senderName.required' => 'Full name is required',
-            'senderName.regex' => 'Invalid Full name',
+            'senderName.required'  => 'Full name is required',
+            'senderName.regex'     => 'Invalid Full name',
             'senderEmail.required' => 'Email id is required',
-            'senderEmail.email' => 'Email is not valid',
-            'subject.required' => 'Subject is required',
-            'subject.regex' => 'Invalid subject',
-            'subject.max' => 'Subject should not exceed 100 characters',
-            'messages.required' => 'Message is required',
-            'messages.regex' => 'Invalid message',
-            'messages.max' => 'Message should not exceed 100 characters',
+            'senderEmail.email'    => 'Email is not valid',
+            'subject.required'     => 'Subject is required',
+            'subject.regex'        => 'Invalid subject',
+            'subject.max'          => 'Subject should not exceed 100 characters',
+            'messages.required'    => 'Message is required',
+            'messages.regex'       => 'Invalid message',
+            'messages.max'         => 'Message should not exceed 100 characters',
             'g-recaptcha-response.required' => 'Verify that you are not a Robot'
         ]);
         
