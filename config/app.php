@@ -172,6 +172,7 @@ return [
         Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
         //
 
         /*

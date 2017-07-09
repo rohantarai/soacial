@@ -29,13 +29,13 @@
                                 <label>
                                     <input type="checkbox" name="remember">Remember me</label>
                             </div>
-                            <button class="btn btn-primary btn-block btn-signin" type="submit" style="border-radius:50px">Login </button><br>
-
+                            <div id="recaptcha1" class="g-recaptcha"></div>
+                            <img src="{{ asset('/img/ajax-loader.gif') }}" id="login-loading-indicator" style="display:none">
+                            <hr>
+                            <button class="btn btn-primary btn-block btn-signin" id="loginFormSubmitBtn" type="submit" style="border-radius:50px">Login </button><br>
                             <input type="hidden" value="{{ csrf_token() }}" name="_token">
                         </form>
                         <a href="#" data-toggle="modal" data-target="#myModalpassword" class="forgot-password">Forgot your password?</a></div>
-                    <hr>
-                    <img src="{{ asset('/img/ajax-loader.gif') }}" id="login-loading-indicator" style="display:none">
                     {{--<div id="login-form-success">
                     </div>
                     <div id="login-form-errors">
@@ -188,11 +188,12 @@
                                 <input type="checkbox" id="agreement"> I accept the Terms & Conditions and Privacy Policy
                             </label>
                         </div>
+                        <div id="recaptcha2" class="g-recaptcha"></div>
+
                         <img src="{{ asset('/img/ajax-loader.gif') }}" id="register-loading-indicator" style="display:none">
 
                         <div id="register-form-success">
                         </div>
-
                     </div><!--modal-body-->
                     <div class="modal-footer">
                         <button class="btn btn-primary pull-left" id="registerFormSubmitBtn" disabled="disabled" type="submit" style="border-radius:50px">Submit</button>

@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
     {{--<link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">--}}
-    {{--<link rel="stylesheet" href="{{ asset('/css/loading-bar.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/loading.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ asset('/css/loading-bar.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ asset('/css/loading.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}">--}}
     {{--<link rel="stylesheet" href="{{ asset('/css/bootstrap-tagsinput.css') }}">--}}
 
@@ -32,6 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/imageviewer/0.5.1/viewer.min.js"></script>
     <script src="{{ asset('/js/custom.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
     {{--<script src="{{ asset('/js/jquery-3.2.1.min.js') }}"></script>--}}
     {{--<script src="{{ asset('/js/select2.min.js') }}"></script>--}}
     {{--<script src="{{ asset('/js/loading-bar.js') }}"></script>--}}
@@ -98,6 +99,16 @@
 
 @include('template.navbar')
 @yield('content')
+
+<script>
+    var onloadCallback = function() {
+        $( ".g-recaptcha" ).each(function() {
+            grecaptcha.render($( this ).attr('id'), {
+                'sitekey' : "6LduXygUAAAAAJyTU953xLIxsIgpH76eOEHscoFX"
+            });
+        });
+    };
+</script>
 </body>
 <footer class="footer">
     <div class="container text-center">
@@ -183,9 +194,8 @@
                                 <textarea name="messages" class="form-control input-sm" id="messages" required></textarea>
                             </div>
                             <input type="hidden" value="{{ csrf_token() }}" name="_token">
-
+                            <div id="recaptcha3" class="g-recaptcha"></div>
                             <img src="{{ asset('/img/ajax-loader.gif') }}" id="contactForm-loading-indicator" style="display:none">
-
                             <div id="contactform-alert">
                             </div>
                     </div>

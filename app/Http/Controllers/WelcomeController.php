@@ -50,12 +50,14 @@ class WelcomeController extends Controller
             'month'             => 'required',
             'yearFrom'          => 'required|digits:4',
             'yearTo'            => 'required|digits:4',
+            'g-recaptcha-response' => 'required|captcha'
         ],
         [
             'yearFrom.required' => 'Academic Year "From" is required',
             'yearFrom.digits'   => 'Academic Year should be in 4-digits only',
-            'yearTo.required' => 'Academic Year "To" is required',
-            'yearTo.digits'   => 'Academic Year should be in 4-digits only'
+            'yearTo.required'   => 'Academic Year "To" is required',
+            'yearTo.digits'     => 'Academic Year should be in 4-digits only',
+            'g-recaptcha-response.required' => 'Verify that you are not a Robot'
         ]);
     }
 
@@ -137,7 +139,11 @@ class WelcomeController extends Controller
     {
         $this->validate($request,[
             'login'    => 'required|regex:/^[0-9a-z.@]+$/',
-            'password'  => 'required|min:6'
+            'password'  => 'required|min:6',
+            'g-recaptcha-response' => 'required|captcha'
+        ],
+        [
+            'g-recaptcha-response.required' => 'Verify that you are not a Robot'
         ]);
 
         $trashedUser = User::with(['usersInfo' => function ($query) {
@@ -252,7 +258,8 @@ class WelcomeController extends Controller
             'senderName'  => 'required|regex:/^[a-zA-Z .,]+$/',
             'senderEmail' => 'required|email|regex:/^[0-9a-z.@]+$/',
             'subject'     => 'required|regex:/^[0-9a-zA-Z .,_()@!:&-\\/]+$/|max:100',
-            'messages'     => 'required|regex:/^[0-9a-zA-Z !@#&*?()-_+:,.\\/]+$/|max:500'
+            'messages'     => 'required|regex:/^[0-9a-zA-Z !@#&*?()-_+:,.\\/]+$/|max:500',
+            'g-recaptcha-response' => 'required|captcha'
         ],
         [
             'senderName.required' => 'Full name is required',
@@ -265,6 +272,7 @@ class WelcomeController extends Controller
             'messages.required' => 'Message is required',
             'messages.regex' => 'Invalid message',
             'messages.max' => 'Message should not exceed 100 characters',
+            'g-recaptcha-response.required' => 'Verify that you are not a Robot'
         ]);
         
         $ip = $request->ip();

@@ -11,7 +11,8 @@
         "schuppo/password-strength": "^1.9",
         "mews/purifier": "^2.0",
         "doctrine/dbal": "^2.5",
-        "barryvdh/laravel-debugbar": "^2.3"
+        "barryvdh/laravel-debugbar": "^2.3",
+        "albertcht/invisible-recaptcha": "^1.6"
     },
     "autoload": {
         "classmap": [
