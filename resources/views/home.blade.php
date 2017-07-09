@@ -205,7 +205,7 @@
     <div class="container">
         @if(!$users->count())
             <div class="alert alert-danger" role="alert">
-                <p>No Results</p>
+                <p>Currently there are no profiles to show</p>
             </div>
         @else
             <div class="row" style="display:flex; flex-wrap: wrap;">
