@@ -234,7 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
-        'Debugbar' => Barryvdh\Debugbar\Debugbar::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
