@@ -32,7 +32,7 @@ class ConfirmationMail extends Mailable
      */
     public function build()
     {
-        return $this->from('dont-reply@soacial.com','SOACIAL')
+        return $this->from('dont-reply@soacial.in','SOAcial')
             ->subject('Account Activation')
             ->view('emails.emailConfirm')
             ->to($this->email)
