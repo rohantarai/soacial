@@ -28,10 +28,10 @@ Route::get('/confirm/{token}','WelcomeController@activate');
 
 Route::post('/forgotpassword','WelcomeController@forgotPassword')->name('forgotPassword');
 
-Route::post('/contactus','WelcomeController@contactUs')->name('contactUs');
+Route::post('/contactus','ContactUsController@contactUs')->name('contactUs');
 
 Route::group(['middleware' => ['auth']], function () {
-    
+
     Route::get('/home','HomeController@index')->name('home');
 
     Route::get('/allfriends','FriendsController@allFriends');
