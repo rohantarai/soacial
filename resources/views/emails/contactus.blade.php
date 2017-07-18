@@ -5,9 +5,10 @@
     <title></title>
 </head>
 <body>
-    <h2>Subject: {{ $subject }}</h2>
+    <h3>Subject: {{ $subject }}</h3>
     <h3>Fullname: {{ $fullname }}</h3>
-    <h4>IP: {{ $ip }}</h4>
+    <h3>Email Id: {{ $email }}</h3>
+    <h3>IP: {{ $ip }}</h3>
     <p>Message: {{ $messages }} </p>
 </body>
 </html>

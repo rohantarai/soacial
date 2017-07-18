@@ -42,6 +42,7 @@ class ContactUsMail extends Mailable
             ->subject($this->subject)
             ->view('emails.contactus')
             ->with(['fullname' => $this->fullname,
+                'email' => $this->email,
                 'subject' => $this->subject,
                 'ip' => $this->ip,
             ]);
