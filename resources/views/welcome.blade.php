@@ -189,7 +189,6 @@
                             </label>
                         </div>
                         <div id="recaptcha2" class="g-recaptcha"></div>
-
                         <img src="{{ asset('/img/ajax-loader.gif') }}" id="register-loading-indicator" style="display:none">
 
                         <div id="register-form-success">
@@ -197,7 +196,7 @@
                     </div><!--modal-body-->
                     <div class="modal-footer">
                         <button class="btn btn-primary pull-left" id="registerFormSubmitBtn" disabled="disabled" type="submit" style="border-radius:50px">Submit</button>
-                        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                        <button class="btn btn-default" type="button" data-dismiss="modal" style="border-radius:50px">Close</button>
                     </div>
                 </form>
             </div><!--modal-content-->
