@@ -14,6 +14,11 @@ use App\Interest;
 
 class EditProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $interests = Interest::all();
@@ -31,7 +36,7 @@ class EditProfileController extends Controller
             'inputLastName'     => 'required|regex:/^[A-Za-z., _-]+$/|min:2|max:25',
             'inputYear1'        => 'required|digits:4',
             'inputYear2'        => 'required|digits:4',*/
-            'inputHighSchool'   => 'regex:/^[A-Za-z. -]+$/|max:100',
+            'inputHighSchool'   => 'regex:/^[A-Za-z., -]+$/|max:100',
             'inputCurrentCity'  => 'regex:/^[A-Za-z., -]+$/|max:50',
             'inputHometown'     => 'regex:/^[A-Za-z., -]+$/|max:50',
             'inputYear'         => 'digits:4',
