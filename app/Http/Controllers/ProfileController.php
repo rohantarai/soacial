@@ -14,6 +14,11 @@ class ProfileController extends Controller
 {
     public $mutualFriends = [];
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function profile(Request $request)
     {
         $this->validate($request,[

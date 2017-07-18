@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class FriendsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function allFriends()
     {
         $users = User::join('friend_user', function ($join) {
