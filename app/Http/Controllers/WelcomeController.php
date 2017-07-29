@@ -47,14 +47,14 @@ class WelcomeController extends Controller
             'month'             => 'required',
             'yearFrom'          => 'required|digits:4',
             'yearTo'            => 'required|digits:4',
-            'g-recaptcha-response' => 'required|captcha'
+            //'g-recaptcha-response' => 'required|captcha'
         ],
         [
             'yearFrom.required' => 'Academic Year "From" is required',
             'yearFrom.digits'   => 'Academic Year should be in 4-digits only',
             'yearTo.required'   => 'Academic Year "To" is required',
             'yearTo.digits'     => 'Academic Year should be in 4-digits only',
-            'g-recaptcha-response.required' => 'Verify that you are not a Robot'
+            //'g-recaptcha-response.required' => 'Verify that you are not a Robot'
         ]);
     }
 
@@ -137,11 +137,11 @@ class WelcomeController extends Controller
         $this->validate($request,[
             'login'    => 'required|regex:/^[0-9a-z.@]+$/',
             'password' => 'required|min:6',
-            'g-recaptcha-response' => 'required|captcha'
-        ],
+            //'g-recaptcha-response' => 'required|captcha'
+        ]/*,
         [
             'g-recaptcha-response.required' => 'Verify that you are not a Robot'
-        ]);
+        ]*/);
 
         $trashedUser = User::with(['usersInfo' => function ($query) {
             $query->onlyTrashed();
@@ -227,12 +227,17 @@ class WelcomeController extends Controller
                     ->first();*/
 
         $this->validate($request,[
-            'forgotPassword' => 'required|regex:/^[0-9a-z.@]+$/'
-        ]);
+            'forgotPassword' => 'required|regex:/^[0-9a-z.@]+$/',
+            //'g-recaptcha-response' => 'required|captcha'
+        ]/*,
+            [
+                'g-recaptcha-response.required' => 'Verify that you are not a Robot'
+            ]*/);
 
         $user = User::select('email','plainPassword')
                     ->where('reg_no',$request->input('forgotPassword'))
                     ->orWhere('email',$request->input('forgotPassword'))
+                    ->withTrashed()
                     ->first();
 
         if($user)
