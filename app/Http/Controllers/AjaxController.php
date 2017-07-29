@@ -16,7 +16,7 @@ class AjaxController extends Controller
         return json_encode($programmes);
     }
 
-    public function deletephoto(Request $request)
+    /*public function deletephoto(Request $request)
     {
         $user = Auth::user();
 
@@ -35,5 +35,5 @@ class AjaxController extends Controller
         else{
             return response()->json(['status' => 'error']);
         }
-    }
+    }*/
 }
