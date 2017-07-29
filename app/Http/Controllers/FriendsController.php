@@ -33,7 +33,7 @@ class FriendsController extends Controller
             ->where('approved', 1)
             ->distinct()
             ->orderBy('friend_user.updated_at','desc')
-            ->paginate(20);
+            ->simplePaginate(20);
 
         return view('allfriends',compact('users'));
     }
@@ -54,7 +54,7 @@ class FriendsController extends Controller
             ->where('approved', 0)
             ->distinct()
             ->orderBy('friend_user.created_at','desc')
-            ->paginate(20);
+            ->simplePaginate(20);
         
         return view('pendingfriends',compact('users'));
     }
@@ -75,7 +75,7 @@ class FriendsController extends Controller
             ->where('approved', 0)
             ->distinct()
             ->orderBy('friend_user.created_at','desc')
-            ->paginate(20);
+            ->simplePaginate(20);
 
         return view('requestedfriends',compact('users'));
     }
@@ -102,5 +102,37 @@ class FriendsController extends Controller
         return response()->json([
             'status' => 'success'
         ]);
+    }
+
+    public function notification()
+    {
+        DB::table('friend_user')
+            ->where('user_id',Auth::user()->id)
+            ->where(function ($query) {
+                $query->where('approved', 1)
+                    ->where('seen',false);
+            })
+            ->update(['seen' => true]);
+
+        $users = User::join('friend_user', function ($join) {
+            $join->on('users.id', '=', 'friend_user.friend_id')
+                ->where('friend_user.user_id', '=', Auth::user()->id);
+        })
+            ->with(['approvedRequests', 'usersInfo' => function ($query) {
+                $query->select('usersinfo.user_regno', 'usersinfo.avatar');
+            }])
+            ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.gender','friend_user.updated_at')
+            ->where('users.verified', 1)
+            ->where('users.reg_no', '!=', Auth::user()->reg_no)
+            ->where(function ($query) {
+                $query->where('user_id',Auth::user()->id)
+                    ->orWhere('friend_id',Auth::user()->id);
+            })
+            ->where('approved', 1)
+            ->distinct()
+            ->orderBy('friend_user.updated_at','desc')
+            ->simplePaginate(20);
+
+        return view('notification', compact('users'));
     }
 }

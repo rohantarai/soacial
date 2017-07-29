@@ -1,7 +1,7 @@
 
     @if(Auth::check())
-    <i class="fa fa-bell fa-3x" aria-hidden="true" role="button" data-toggle="modal" data-target=".bs-example-modal-sm" style="margin-top:400px; position:fixed; z-index:1000; ">
-        <span class="badge" style="margin-left: -35px; margin-bottom: 70px;">@if($countPendingFriends){{ $countPendingFriends }}@endif</span>
+    <i class="fa fa-bell fa-3x" aria-hidden="true" role="button" data-toggle="modal" data-target=".bs-example-modal-sm" style="margin-top:400px; position:fixed; z-index:1000;">
+        <span class="badge" style="margin-left: -30px; margin-bottom: 70px; position:relative;">@if($countPendingFriends){{ $countPendingFriends }}@elseif($notification){{ $notification }}@endif</span>
     </i>
     @endif
 
@@ -12,6 +12,7 @@
                     <li><a href="{{ url('/allfriends') }}">All Friends <span class="badge">@if($countFriends){{ $countFriends }}@endif</span></a></li>
                     <li><a href="{{ url('/pendingfriends') }}">Requests Pending <span class="badge">@if($countPendingFriends){{ $countPendingFriends }}@endif</span></a></li>
                     <li><a href="{{ url('/requestedfriends') }}">Requests Sent <span class="badge">@if($countRequestedFriends){{ $countRequestedFriends }}@endif</span></a></li>
+                    <li><a href="{{ url('/notification') }}">Notification <span class="badge">@if($notification){{ $notification }}@endif</span></a></li>
                 </ul>
             </div>
         </div>
