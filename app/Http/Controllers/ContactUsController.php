@@ -15,7 +15,6 @@ class ContactUsController extends Controller
             'senderEmail' => 'required|email|regex:/^[0-9a-z.@]+$/',
             'subject'     => 'required|regex:/^[0-9a-zA-Z .,_()@!:&-\\/]+$/|max:100',
             'messages'    => 'required|regex:/^[0-9a-zA-Z !@#&*?()-_+:,.\\/]+$/|max:500',
-            'g-recaptcha-response' => 'required|captcha'
         ],
             [
                 'senderName.required'  => 'Full name is required',
@@ -28,7 +27,6 @@ class ContactUsController extends Controller
                 'messages.required'    => 'Message is required',
                 'messages.regex'       => 'Invalid message',
                 'messages.max'         => 'Message should not exceed 100 characters',
-                'g-recaptcha-response.required' => 'Verify that you are not a Robot'
             ]);
 
         $ip = $request->ip();
