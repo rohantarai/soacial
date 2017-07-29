@@ -7,7 +7,7 @@
                     @if(!is_null($user->usersInfo->avatar))
                         @if($user->approvedRequests->contains(Auth::user()->id) || Auth::user()->approvedRequests->contains($user->id) || Auth::user()->reg_no == $user->reg_no)
                         <a href="#"><img class="dp" src="{{ asset('/uploads/avatars/'.$user->usersInfo->user_regno.'/'.$user->usersInfo->avatar) }}"/></a>
-                        @elser
+                        @else
                             <img src="{{ asset('/uploads/avatars/'.$user->usersInfo->user_regno.'/'.$user->usersInfo->avatar) }}"/>
                         @endif
                     @elseif($user->gender == 'Male')
@@ -82,16 +82,15 @@
             </div>
             <div id="bg" class="col-md-9">
                 <div class="container-fluid">
-                    <ul class="nav nav-tabs">
+                    {{--<ul class="nav nav-tabs">
                         <li class="active"> <a href="#about" data-toggle="tab"><strong>About</strong></a></li>
                         <li> <a href="#photos" data-toggle="tab"><strong>Photos</strong></a></li>
                         <li> <a href="#contact" data-toggle="tab"><strong>Social</strong></a></li>
-                    </ul>
+                    </ul>--}}
                     @if(Auth::user()->approvedRequests->contains($user->id) || $user->approvedRequests->contains(Auth::user()->id) || Auth::user()->reg_no == $user->reg_no)
-                    <div class="tab-content">
+                    {{--<div class="tab-content">
                         <div id="about" class="tab-pane fade in active">
-                            <div class="container-fluid">
-                                <hr>
+                            <div class="container-fluid">--}}
                                 <dl class="dl-horizontal">
                                     <dt>Academic Year:</dt>
                                     <dd>{{ $user->usersInfo->academicYear_from }} - {{ $user->usersInfo->academicYear_to }}</dd>
@@ -158,11 +157,11 @@
                                     <dt>About Me:</dt>
                                     <dd><?php echo clean($user->usersInfo->about) ?></dd>
                                 </dl>
-                            </div>
-                        </div>
-                        <div id="photos" class="tab-pane fade">
+                            {{--</div>
+                        </div>--}}
+                        {{--<div id="photos" class="tab-pane fade">
                             <div class="row">
-                                {{--<a class="btn btn-info btn-xs" role="button" href="#" id="position">Upload </a>--}}
+                                --}}{{--<a class="btn btn-info btn-xs" role="button" href="#" id="position">Upload </a>--}}{{--
                                 @if(Auth::user()->reg_no == $user->reg_no)
                                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#deletePhoto" style="margin-top:10px; border-radius:50px">Delete Photo</button>
                                 @endif
@@ -174,47 +173,53 @@
                                 @endforeach
                                 </div>
                             </div>
+                        </div>--}}
+                        {{--<div id="contact" class="tab-pane fade">
+                            <div class="container-fluid" style="margin-top:10px;">--}}
+                                <hr>
+                                <dl class="dl-horizontal">
+                                    <dt>I'm also on:</dt>
+                                    <dd>
+                                        @if($user->usersInfo->facebook)
+                                            <a id="fb" href="{{ url('https://fb.com/'.$user->usersInfo->facebook) }}" target="_blank"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
+                                            <a href="{{ url('https://m.me/'.$user->usersInfo->facebook) }}" target="_blank"><img src="{{ asset('/img/fbme.png') }}" style="width:45px;position:relative;top:-10px" /></a>
+                                        @endif
+                                        @if($user->usersInfo->instagram)
+                                            <a id="is" href="{{ url('https://instagram.com/'.$user->usersInfo->instagram) }}" target="_blank"><i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        @if($user->usersInfo->googleplus)
+                                            <a id="gp" href="{{ url('https://plus.google.com/'.$user->usersInfo->googleplus) }}" target="_blank"><i class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        @if($user->usersInfo->linkedin)
+                                            <a id="li" href="{{ url('https://in.linkedin.com/in/'.$user->usersInfo->linkedin) }}" target="_blank"><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        @if($user->usersInfo->twitter)
+                                            <a id="tw" href="{{ url('https://twitter.com/'.$user->usersInfo->twitter) }}" target="_blank"><i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        @if($user->usersInfo->youtube)
+                                            <a id="yt" href="{{ url('https://youtube.com/'.$user->usersInfo->youtube) }}" target="_blank"><i class="fa fa-youtube-square fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        {{--@if($user->usersInfo->quora)
+                                            <a id="qu" href="{{ url('https://quora.com/profile/'.$user->usersInfo->quora) }}" target="_blank"><i class="fa fa-quora fa-4x" aria-hidden="true"></i></a>
+                                        @endif--}}
+                                        @if($user->usersInfo->skype)
+                                            <a id="sk" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->skype }}"><i class="fa fa-skype fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        @if($user->usersInfo->snapchat)
+                                            <a id="sc" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->snapchat }}"><i class="fa fa-snapchat-square fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        @if($user->usersInfo->telegram)
+                                            <a id="te" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->telegram }}"><i class="fa fa-telegram fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        @if($user->usersInfo->whatsapp)
+                                            <a id="wq" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->whatsapp }}"><i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        {{--<a data-toggle="tooltip" data-placement="bottom" title="{{ $user->email }}" style="color:#d34836;"><i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i></a>--}}
+                                    </dd>
+                                </dl>
+                            {{--</div>
                         </div>
-                        <div id="contact" class="tab-pane fade">
-                            <div class="container-fluid" style="margin-top:10px;">
-                                @if($user->usersInfo->facebook)
-                                    <a id="fb" href="{{ url('https://fb.com/'.$user->usersInfo->facebook) }}" target="_blank"><i class="fa fa-facebook-square fa-4x" aria-hidden="true"></i></a>
-                                    <a href="{{ url('https://m.me/'.$user->usersInfo->facebook) }}" target="_blank"><img src="{{ asset('/img/fbme.png') }}" style="position:relative;top:-15px" /></a>
-                                @endif
-                                @if($user->usersInfo->instagram)
-                                    <a id="is" href="{{ url('https://instagram.com/'.$user->usersInfo->instagram) }}" target="_blank"><i class="fa fa-instagram fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                @if($user->usersInfo->googleplus)
-                                    <a id="gp" href="{{ url('https://plus.google.com/'.$user->usersInfo->googleplus) }}" target="_blank"><i class="fa fa-google-plus-square fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                @if($user->usersInfo->linkedin)
-                                    <a id="li" href="{{ url('https://in.linkedin.com/in/'.$user->usersInfo->linkedin) }}" target="_blank"><i class="fa fa-linkedin-square fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                @if($user->usersInfo->twitter)
-                                    <a id="tw" href="{{ url('https://twitter.com/'.$user->usersInfo->twitter) }}" target="_blank"><i class="fa fa-twitter-square fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                @if($user->usersInfo->youtube)
-                                    <a id="yt" href="{{ url('https://youtube.com/'.$user->usersInfo->youtube) }}" target="_blank"><i class="fa fa-youtube-square fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                {{--@if($user->usersInfo->quora)
-                                    <a id="qu" href="{{ url('https://quora.com/profile/'.$user->usersInfo->quora) }}" target="_blank"><i class="fa fa-quora fa-4x" aria-hidden="true"></i></a>
-                                @endif--}}
-                                @if($user->usersInfo->skype)
-                                    <a id="sk" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->skype }}"><i class="fa fa-skype fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                @if($user->usersInfo->snapchat)
-                                    <a id="sc" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->snapchat }}"><i class="fa fa-snapchat-square fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                @if($user->usersInfo->telegram)
-                                    <a id="te" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->telegram }}"><i class="fa fa-telegram fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                @if($user->usersInfo->whatsapp)
-                                    <a id="wq" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->whatsapp }}"><i class="fa fa-whatsapp fa-4x" aria-hidden="true"></i></a>
-                                @endif
-                                    <a data-toggle="tooltip" data-placement="bottom" title="{{ $user->email }}" style="color:#d34836;"><i class="fa fa-envelope-o fa-4x" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    </div>--}}
                     @else
                         <div class="text-center">
                             <h3 style="color: lightgrey;">Only {{$user->first_name}}'s friends can see this profile</h3>
@@ -252,6 +257,7 @@
                         <div class="col-md-6 col-md-offset-3">
                             <label>Select Your Image</label><br/>
                             <input type="file" name="image" id="image" accept="image/*" required>
+                            <small>(max. file size 7MB)</small>
                             <br>
                             <div id="progress" class="">
                                 <div id="progressBar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
@@ -284,7 +290,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="deletePhoto">
+    {{--<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="deletePhoto">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -299,7 +305,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
     <!-- Modal Mutual Friends -->
     <div class="modal fade" id="myModalMutuals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -367,11 +373,11 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('.album').viewer({
+            /*$('.album').viewer({
                 title: false,
                 movable: false,
                 maxZoomRatio: 10
-            });
+            });*/
 
             $('.dp').viewer({
                 title: false,
