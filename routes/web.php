@@ -44,9 +44,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/searchinterest','EditProfileController@searchInterest')->name('searchInterest');
 
-    /*Route::get('/search','HomeController@getResult')->name('searchResult');*/
+    //Route::get('/search','HomeController@getResult')->name('searchResult');
 
-    Route::post('/deletephotos','AjaxController@deletephoto');
+    //Route::post('/deletephotos','AjaxController@deletephoto');
     
     Route::get('/logout','WelcomeController@logout')->name('logout_user');
 
@@ -73,5 +73,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pendingrequest','HomeController@pendingRequest')->name('pendingRequest');
 
     Route::get('/deleterequest/{regno}','FriendsController@deleteRequest')->name('deleteRequest');
+
+    Route::get('/notification','FriendsController@notification');
 
 });
