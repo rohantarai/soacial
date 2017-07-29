@@ -156,13 +156,12 @@
             <label for="inputRelationshipStatus" class="col-md-2 control-label">Relationship Status:</label>
             <div class="col-md-3">
                 <select class="form-control input-sm" name="inputRelationshipStatus" id="inputRelationshipStatus">
-                    <option selected disabled>{{ $users->usersInfo->relationship }}</option> <i class="fa fa-check" aria-hidden="true"></i>
-                    <option>Single</option>
-                    <option>Forever Single</option>
-                    <option>In Relationship</option>
-                    <option>In Long-Distance Relationship</option>
-                    <option>Its Complicated</option>
-                    <option>Confidential</option>
+                    <option value="Single">Single</option>
+                    <option value="Forever Single">Forever Single</option>
+                    <option value="In Relationship">In Relationship</option>
+                    <option value="In Long-Distance Relationship">In Long-Distance Relationship</option>
+                    <option value="Its Complicated">Its Complicated</option>
+                    <option value="Confidential">Confidential</option>
                 </select>
             </div>
         </div>
@@ -256,7 +255,7 @@
                         <i class="fa fa-linkedin-square fa-3x pull-right" aria-hidden="true"></i>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" value="{{ $users->usersInfo->linkedIn }}" class="form-control" name="LinkedIn" id="inputLinkedIn" placeholder="LinkedIn">
+                        <input type="text" value="{{ $users->usersInfo->linkedin }}" class="form-control" name="LinkedIn" id="inputLinkedIn" placeholder="LinkedIn">
                     </div>
                     <div>
                         <i class="fa fa-info-circle fa-1x" aria-hidden="true"></i> <small>in.linkedin.com/in/<mark>username</mark></small>
@@ -384,6 +383,8 @@
             placeholder: "Choose Interests",
             closeOnSelect: false
         });
+
+        $('#inputRelationshipStatus').val("{{ $users->usersInfo->relationship }}").change();
     });
 </script>
 @endsection
