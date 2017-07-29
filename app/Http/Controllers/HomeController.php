@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FriendRequestMail;
+use App\Mail\FriendAcceptMail;
 
 class HomeController extends Controller
 {
@@ -36,25 +39,26 @@ class HomeController extends Controller
 
         // GETS ALL years NAME AS AN ARRAY TO DISPLAY ON HOME PAGE
         $years = UsersInfo::join('users', 'usersinfo.user_regno','=','users.reg_no')
-            ->select('usersinfo.academicYear_to')
+            ->select('usersinfo.academicYear_to','users.verified')
             ->distinct()
             ->where('users.verified',1)
             ->orderBy('usersinfo.academicYear_to','desc')
             ->get();
 
 
-            $users = User::join('usersinfo', 'users.reg_no', '=', 'usersinfo.user_regno')
-                /*->join('friend_user', 'users.id', '=', 'friend_user.user_id')*/
-                /*->join('friend_user', function ($join) {
-                    $join->on('users.id', '=', 'friend_user.user_id')
-                        ->orOn('users.id', '=', 'friend_user.friend_id');
-                })*/
+            $users = User::join('usersinfo', function ($join) {
+                    $join->on('users.reg_no', '=', 'usersinfo.user_regno')
+                        ->where(function ($query){
+                            $query->where('users.verified', 1)
+                                ->where('users.reg_no', '!=', Auth::user()->reg_no);
+                        });
+                })
+                //join('usersinfo', 'users.reg_no', '=', 'usersinfo.user_regno')
+                //->join('friend_user', 'users.id', '=', 'friend_user.user_id')
                 ->with(['pendingRequests','approvedRequests','institutes', 'usersInfo' => function ($query) {
                     $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
                 }])
-                ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender')
-                ->where('users.verified', 1)
-                ->where('users.reg_no', '!=', Auth::user()->reg_no)
+                ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender','users.created_at','users.verified','usersinfo.academicYear_from')
                 ->when($request->input('query'), function ($query) use ($request) {
                     return $query->where('users.first_name','LIKE',"{$request->input('query')}%")
                             ->orWhere('last_name','LIKE',"{$request->input('query')}%")
@@ -74,8 +78,9 @@ class HomeController extends Controller
                     return $query->where('interest_user.interest_id', $request->input('interest'));
                 })
                 ->distinct()
-                ->orderBy('users.first_name')
-                ->paginate(20);
+                ->orderBy('usersinfo.academicYear_from','desc')
+                ->orderBy('users.reg_no','desc')
+                ->simplePaginate(20);
         
         return view('home')->with(['users' => $users,
                                     'years' => $years,
@@ -86,7 +91,7 @@ class HomeController extends Controller
     
     public function searchProfile(Request $request)
     {
-        $data = User::select('first_name','last_name')
+        $data = User::select('first_name','last_name','verified')
                     ->distinct()
                     ->where('verified',1)
                     ->where('reg_no', '!=', Auth::user()->reg_no)
@@ -107,11 +112,12 @@ class HomeController extends Controller
             'regno'    => 'regex:/^[0-9]+$/'
         ]);
 
-        $user = User::select('id')->where('reg_no',$request->regno)->first();
+        $user = User::select('id','email')->where('reg_no',$request->regno)->first();
 
         if(!is_null($user) && !Auth::user()->pendingRequests->contains($user->id) && !$user->pendingRequests->contains(Auth::user()->id))
         {
             Auth::user()->pendingRequests()->attach($user->id);
+            //Mail::to($user->email)->send(new FriendRequestMail(Auth::user()->email,Auth::user()->full_name));
         }
         else
         {
@@ -132,13 +138,15 @@ class HomeController extends Controller
             'accept'    => 'boolean'
         ]);
 
-        $user = User::select('id')->where('reg_no',$request->regno)->first();
+        $user = User::select('id','email')->where('reg_no',$request->regno)->first();
 
         if($request->accept == true)
         {
             if(!is_null($user) && !Auth::user()->pendingRequests->contains($user->id) && $user->pendingRequests->contains(Auth::user()->id))
             {
                 $user->pendingRequests()->updateExistingPivot(Auth::user()->id, ['approved' => true]);
+
+                //Mail::to($user->email)->send(new FriendAcceptMail(Auth::user()->email,Auth::user()->full_name));
 
                 return response()->json([
                     'status' => 'success'
