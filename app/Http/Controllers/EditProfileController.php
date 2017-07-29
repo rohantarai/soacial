@@ -53,7 +53,7 @@ class EditProfileController extends Controller
             'Telegram'          => 'regex:/^[A-Za-z0-9._-]+$/',
             'Twitter'           => 'regex:/^[A-Za-z0-9._-]+$/',
             'Whatsapp'          => 'regex:/^[+0-9]+$/|max:13',
-            'Youtube'           => 'regex:/^[A-Za-z0-9._-]+$/',
+            'Youtube'           => 'regex:/^[A-Za-z0-9._\\/-]+$/',
             'Quora'             => 'regex:/^[A-Za-z0-9._-]+$/',
 
         ],[
