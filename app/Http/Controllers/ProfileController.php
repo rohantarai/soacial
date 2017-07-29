@@ -26,7 +26,8 @@ class ProfileController extends Controller
         ]);
 
         $user = User::with('usersInfo','institutes','programmes')
-                    ->select('id','reg_no','first_name','last_name','gender','institute','programme','email')
+                    ->select('id','reg_no','first_name','last_name','gender','institute','programme','email','verified')
+                    ->where('verified',1)
                     ->where('reg_no',$request->regno)
                     ->first();
 
@@ -36,7 +37,7 @@ class ProfileController extends Controller
         $presentUserFriends = $user->with(['usersInfo'  => function ($query) {
                             $query->select('usersinfo.user_regno','usersinfo.avatar');
                         }])
-                        ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender')
+                        ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender','users.verified')
                         ->join('friend_user', function ($join) {
                             $join->on('users.id', '=', 'friend_user.user_id')
                                 ->orOn('users.id', '=', 'friend_user.friend_id');
@@ -45,6 +46,7 @@ class ProfileController extends Controller
                             $query->where('friend_user.user_id','=',$user->id)
                                 ->orWhere('friend_user.friend_id','=',$user->id);
                         })
+                        ->where('users.verified',1)
                         ->where('users.id','!=',$user->id)
                         ->where('friend_user.approved', 1)
                         ->get();
@@ -53,7 +55,7 @@ class ProfileController extends Controller
         $authUserFriends = Auth::user()->with(['usersInfo'  => function ($query) {
                                 $query->select('usersinfo.user_regno','usersinfo.avatar');
                             }])
-                            ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender')
+                            ->select('users.id','users.reg_no','users.first_name','users.last_name','users.gender','users.verified')
                             ->join('friend_user', function ($join) {
                                 $join->on('users.id', '=', 'friend_user.user_id')
                                     ->orOn('users.id', '=', 'friend_user.friend_id');
@@ -63,6 +65,7 @@ class ProfileController extends Controller
                                     ->orWhere('friend_user.friend_id','=',Auth::user()->id);
                             })
                             ->where('users.id','!=',Auth::user()->id)
+                            ->where('users.verified',1)
                             ->where('friend_user.approved', 1)
                             ->get();
         
@@ -98,13 +101,11 @@ class ProfileController extends Controller
         if(!$user)
             abort(404);
 
-        $Path = 'uploads/avatars/'.$user->reg_no.'/';
-        $images = glob($Path."*");
+        //$Path = 'uploads/avatars/'.$user->reg_no.'/';
+        //$images = glob($Path."*");
 
 
-        return view('profile')->with(['images' => $images,
-                                        'user' => $user,
-                                        'mutualFriends' => $this->mutualFriends]);
+        return view('profile')->with([/*'images' => $images,*/'user' => $user, 'mutualFriends' => $this->mutualFriends]);
         
         /*return view('profile',compact('images','user','mutualFriends'));*/
     }
@@ -117,10 +118,15 @@ class ProfileController extends Controller
         ],[
             'image.max'  => 'File size should not exceed 7MB',
         ])->validate();
-
-        /*dd($request->all());*/
         
         $user = Auth::user()->usersInfo;
+
+        //removing previous photo if exists
+        if(!is_null($user->avatar))
+        {
+            unlink(public_path('/uploads/avatars/'.$user->user_regno.'/'.$user->avatar));
+        }
+
         $avatar = $request->file('image');
         $destinationPath = public_path('/uploads/avatars/'.$user->user_regno.'/');
         $filename = date("dMY_g.iaT"). '.' .$avatar->getClientOriginalExtension();
