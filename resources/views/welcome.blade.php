@@ -222,7 +222,7 @@
                         </div>--}}
 
                         <input type="hidden" value="{{ csrf_token() }}" name="_token">
-
+                        <div id="recaptcha3" class="g-recaptcha"></div>
                         <img src="{{ asset('/img/ajax-loader.gif') }}" id="password-loading-indicator" style="display:none">
 
                         <div id="password-form-success">
