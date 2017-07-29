@@ -94,7 +94,7 @@ $(document).ready(function() {
                 if(data.status == 'success'){
                     $.notify({
                         // custom notification message
-                        message: "Successfull",
+                        message: "Successful",
                         // 'default', 'info', 'error', 'warning', 'success'
                         status: "success",
                         // timeout in ms
@@ -236,6 +236,8 @@ $(document).ready(function() {
                         });
                     });
                     $('#registerFormSubmitBtn').removeAttr('disabled', 'disabled');
+
+                    grecaptcha.reset(widgetId2);
                 }
             });
         //};
@@ -286,7 +288,7 @@ $(document).ready(function() {
                     /*$('#login-form-errors').html(errorHtml).show().fadeOut(3000);*/
                     $.notify({
                         // custom notification message
-                        message: "Invalid Credentials",
+                        message: "Invalid Credentials. Kindly Contact Us",
                         // 'default', 'info', 'error', 'warning', 'success'
                         status: "error",
                         // timeout in ms
@@ -297,6 +299,8 @@ $(document).ready(function() {
                         zIndex: 10400
                     });
                     $('#loginFormSubmitBtn').removeAttr('disabled', 'disabled');
+
+                    grecaptcha.reset(widgetId1);
                 }
             },
             error: function (data) {
@@ -322,8 +326,9 @@ $(document).ready(function() {
                         zIndex: 10400
                     });
                 });
-
                 $('#loginFormSubmitBtn').removeAttr('disabled', 'disabled');
+
+                grecaptcha.reset(widgetId1);
             }
         });
     //};
@@ -488,7 +493,7 @@ $(document).ready(function() {
         });
     });
 });
-$(document).ready(function() {
+/*$(document).ready(function() {
     $('.delete').on('click', function(e) {
         e.preventDefault();
 
@@ -540,7 +545,7 @@ $(document).ready(function() {
             });
         }
     });
-});
+});*/
 $(document).ready(function() {
     $('#passwordForm').on('submit', function(e) {
         e.preventDefault();
@@ -578,6 +583,8 @@ $(document).ready(function() {
                         // z-index style for alert container
                         zIndex: 10400
                     });
+
+                    grecaptcha.reset(widgetId3);
                 }
             },
             error: function (data) {
@@ -602,6 +609,8 @@ $(document).ready(function() {
                         zIndex: 10400
                     });
                 });
+
+                grecaptcha.reset(widgetId3);
             }
         });
     });
@@ -753,6 +762,8 @@ $(document).ready(function() {
                     errorHtml = '<div class="alert alert-danger">Something went wrong. Try again later</div>';
                     $('#contactform-alert').html(errorHtml);
                     $('#contactFormSubmitBtn').removeAttr('disabled', 'disabled');
+
+                    grecaptcha.reset(widgetId4);
                 }
 
             },
@@ -779,6 +790,8 @@ $(document).ready(function() {
                     });
                 });
                 $('#contactFormSubmitBtn').removeAttr('disabled', 'disabled');
+
+                grecaptcha.reset(widgetId4);
             }
         });
         
