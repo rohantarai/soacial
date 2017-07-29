@@ -140,9 +140,12 @@ button.btn.btn-default.btn-info.btn-primary{
     height: 50px;
     background-color: #f5f5f5;
 }
-.caret{
+/*.caret{
     display:none;
 }
 a:hover .caret{
     display: inline-flex;
+}*/
+a{
+    text-decoration: none !important;
 }
