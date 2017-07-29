@@ -24,7 +24,7 @@ class CreateUsersInfoTable extends Migration
             $table->unsignedTinyInteger('born_day');
             $table->string('born_month', 10);
             $table->unsignedSmallInteger('born_year')->nullable();
-            $table->string('relationship', 20)->nullable();
+            $table->string('relationship', 30)->nullable();
             $table->text('quotes')->nullable();
             $table->text('achievements')->nullable();
             $table->text('about')->nullable();
