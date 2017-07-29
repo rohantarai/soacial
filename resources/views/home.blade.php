@@ -51,100 +51,118 @@
                 </div>
                 <button type="submit" class="fa fa-search fa-2x" aria-hidden="true" style="position:relative; margin-left: -70px; background-color: transparent; border-color: transparent"></button>
             </div>
-            <ul class="nav nav-tabs nav-justified">
-                <li role="presentation" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        Alphabet <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu alphabet" style="height:auto; max-height:150px; overflow-x:hidden;">
-                        <li value=""><a href="#">---Reset---</a></li>
-                        <li value="A"><a href="#">A</a></li>
-                        <li value="B"><a href="#">B</a></li>
-                        <li value="C"><a href="#">C</a></li>
-                        <li value="D"><a href="#">D</a></li>
-                        <li value="E"><a href="#">E</a></li>
-                        <li value="F"><a href="#">F</a></li>
-                        <li value="G"><a href="#">G</a></li>
-                        <li value="H"><a href="#">H</a></li>
-                        <li value="I"><a href="#">I</a></li>
-                        <li value="J"><a href="#">J</a></li>
-                        <li value="K"><a href="#">K</a></li>
-                        <li value="L"><a href="#">L</a></li>
-                        <li value="M"><a href="#">M</a></li>
-                        <li value="N"><a href="#">N</a></li>
-                        <li value="O"><a href="#">O</a></li>
-                        <li value="P"><a href="#">P</a></li>
-                        <li value="Q"><a href="#">Q</a></li>
-                        <li value="R"><a href="#">R</a></li>
-                        <li value="S"><a href="#">S</a></li>
-                        <li value="T"><a href="#">T</a></li>
-                        <li value="U"><a href="#">U</a></li>
-                        <li value="V"><a href="#">V</a></li>
-                        <li value="W"><a href="#">W</a></li>
-                        <li value="X"><a href="#">X</a></li>
-                        <li value="Y"><a href="#">Y</a></li>
-                        <li value="Z"><a href="#">Z</a></li>
-                    </ul>
-                </li>
-                <li role="presentation" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        Institute <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu institute" style="height:auto; max-height:150px; overflow-x:hidden;">
-                            <li value=""><a href="#">---Reset---</a></li>
-                        @foreach($institutes as $institute)
-                            <li value="{{ $institute->id }}"><a href="#">{{ $institute->name }}</a></li>
-                        @endforeach
-                    </ul>
-                </li>
-                <li role="presentation" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        Passout Year <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu year" style="height:auto; max-height:150px; overflow-x:hidden;">
-                            <li value=""><a href="#">---Reset---</a></li>
-                        @foreach($years as $year)
-                            <li value="{{ $year->academicYear_to }}"><a href="#">{{ $year->academicYear_to }}</a></li>
-                        @endforeach
-                    </ul>
-                </li>
-                <li role="presentation" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        Interest <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu interest" style="height:auto; max-height:150px; overflow-x:hidden;">
-                            <li value=""><a href="#">---Reset---</a></li>
-                        @foreach($interests as $interest)
-                            <li value="{{ $interest->id }}"><a href="#">{{ $interest->name }}</a></li>
-                        @endforeach
-                    </ul>
-                </li>
-                {{--<li role="presentation" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        Gender <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu gender" style="height:auto; max-height:150px; overflow-x:hidden;">
-                        <li role="presentation" id="male" value="male"><a href="#">Male</a></li>
-                        <li role="presentation" id="female" value="female"><a href="#">Female</a></li>
-                    </ul>
-                </li>--}}
 
-                {{--<li role="presentation" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        Relationship Status <span class="caret"></span>
+            <div class="panel panel-default" style="border-radius: 50px;">
+                <div class="panel-heading" role="tab" id="headingOne" style="border-radius: 50px;">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h4 class="panel-title">
+                            Filter
+                        </h4>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li value="Single"><a href="#">Single</a></li>
-                        <li value="Forever Single"><a href="#">Forever Single</a></li>
-                        <li value="In Relationship"><a href="#">In Relationship</a></li>
-                        <li value="In Long-Distance Relationship"><a href="#">In Long-Distance Relationship</a></li>
-                        <li value="Its Complicated"><a href="#">Its Complicated</a></li>
-                    </ul>
-                </li>--}}
-            </ul>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <ul class="nav nav-tabs nav-justified">
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Alphabet <span class="caret"></span> <span class="label label-default">{{ request()->input('alpha') }}</span>
+                                </a>
+                                <ul class="dropdown-menu alphabet" style="height:auto; max-height:150px; overflow-x:hidden;">
+                                    <li value=""><a href="#">---Reset---</a></li>
+                                    <li value="A"><a href="#">A</a></li>
+                                    <li value="B"><a href="#">B</a></li>
+                                    <li value="C"><a href="#">C</a></li>
+                                    <li value="D"><a href="#">D</a></li>
+                                    <li value="E"><a href="#">E</a></li>
+                                    <li value="F"><a href="#">F</a></li>
+                                    <li value="G"><a href="#">G</a></li>
+                                    <li value="H"><a href="#">H</a></li>
+                                    <li value="I"><a href="#">I</a></li>
+                                    <li value="J"><a href="#">J</a></li>
+                                    <li value="K"><a href="#">K</a></li>
+                                    <li value="L"><a href="#">L</a></li>
+                                    <li value="M"><a href="#">M</a></li>
+                                    <li value="N"><a href="#">N</a></li>
+                                    <li value="O"><a href="#">O</a></li>
+                                    <li value="P"><a href="#">P</a></li>
+                                    <li value="Q"><a href="#">Q</a></li>
+                                    <li value="R"><a href="#">R</a></li>
+                                    <li value="S"><a href="#">S</a></li>
+                                    <li value="T"><a href="#">T</a></li>
+                                    <li value="U"><a href="#">U</a></li>
+                                    <li value="V"><a href="#">V</a></li>
+                                    <li value="W"><a href="#">W</a></li>
+                                    <li value="X"><a href="#">X</a></li>
+                                    <li value="Y"><a href="#">Y</a></li>
+                                    <li value="Z"><a href="#">Z</a></li>
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Institute <span class="caret"></span> <span class="label label-default">{{ request()->input('institute') }}</span>
+                                </a>
+                                <ul class="dropdown-menu institute" style="height:auto; max-height:150px; overflow-x:hidden;">
+                                    <li value=""><a href="#">---Reset---</a></li>
+                                    @foreach($institutes as $institute)
+                                        <li value="{{ $institute->id }}"><a href="#">{{ $institute->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Passout Year <span class="caret"></span> <span class="label label-default">{{ request()->input('year') }}</span>
+                                </a>
+                                <ul class="dropdown-menu year" style="height:auto; max-height:150px; overflow-x:hidden;">
+                                    <li value=""><a href="#">---Reset---</a></li>
+                                    @foreach($years as $year)
+                                        <li value="{{ $year->academicYear_to }}"><a href="#">{{ $year->academicYear_to }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Interest <span class="caret"></span> <span class="label label-default">{{ request()->input('interest') }}</span>
+                                </a>
+                                <ul class="dropdown-menu interest" style="height:auto; max-height:150px; overflow-x:hidden;">
+                                    <li value=""><a href="#">---Reset---</a></li>
+                                    @foreach($interests as $interest)
+                                        <li value="{{ $interest->id }}"><a href="#">{{ $interest->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            {{--<li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Gender <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu gender" style="height:auto; max-height:150px; overflow-x:hidden;">
+                                    <li role="presentation" id="male" value="male"><a href="#">Male</a></li>
+                                    <li role="presentation" id="female" value="female"><a href="#">Female</a></li>
+                                </ul>
+                            </li>--}}
+
+                            {{--<li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Relationship Status <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li value="Single"><a href="#">Single</a></li>
+                                    <li value="Forever Single"><a href="#">Forever Single</a></li>
+                                    <li value="In Relationship"><a href="#">In Relationship</a></li>
+                                    <li value="In Long-Distance Relationship"><a href="#">In Long-Distance Relationship</a></li>
+                                    <li value="Its Complicated"><a href="#">Its Complicated</a></li>
+                                </ul>
+                            </li>--}}
+                            <li>
+                                <a href="{{ url('/') }}">
+                                    <small>Reset all</small>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
-
 
     <script>
         $(document).ready(function() {
@@ -205,7 +223,7 @@
     <div class="container">
         @if(!$users->count())
             <div class="alert alert-danger" role="alert">
-                <p>Currently there are no profiles to show</p>
+                <p>No Results</p>
             </div>
         @else
             <div class="row" style="display:flex; flex-wrap: wrap;">
