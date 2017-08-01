@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Institute;
+use App\Programme;
 use App\UsersInfo;
 use App\Interest;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class HomeController extends Controller
         Validator::make($request->all(), [
             'alpha'       => 'alpha',
             'institute'   => 'string',
+            'programme'   => 'string',
             'year'        => 'digits:4',
             'interest'    => 'numeric',
             'query'       => 'regex:/^[A-Za-z. ]+$/|max:30'
@@ -33,6 +35,11 @@ class HomeController extends Controller
 
         // GETS ALL institutes NAME AS AN ARRAY TO DISPLAY ON HOME PAGE
         $institutes = Institute::orderBy('id')->get();
+
+        // GETS ALL programmes NAME AS AN ARRAY TO DISPLAY ON HOME PAGE
+        $programmes = Programme::when($request->input('institute'), function ($query) use ($request) {
+                                return $query->where('institute_id', $request->input('institute'))->orderBy('id')->get();
+                            });
 
         // GETS ALL interests NAME AS AN ARRAY TO DISPLAY ON HOME PAGE
         $interests = Interest::orderBy('id')->get();
@@ -55,10 +62,10 @@ class HomeController extends Controller
                 })
                 //join('usersinfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 //->join('friend_user', 'users.id', '=', 'friend_user.user_id')
-                ->with(['pendingRequests','approvedRequests','institutes', 'usersInfo' => function ($query) {
+                ->with(['pendingRequests','approvedRequests','institutes','programmes', 'usersInfo' => function ($query) {
                     $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
                 }])
-                ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.gender','users.created_at','users.verified','usersinfo.academicYear_from')
+                ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.programme', 'users.gender','users.created_at','users.verified','usersinfo.academicYear_from')
                 ->when($request->input('query'), function ($query) use ($request) {
                     return $query->where('users.first_name','LIKE',"{$request->input('query')}%")
                             ->orWhere('last_name','LIKE',"{$request->input('query')}%")
@@ -69,6 +76,9 @@ class HomeController extends Controller
                 })
                 ->when($request->input('institute'), function ($query) use ($request) {
                     return $query->where('users.institute', $request->input('institute'));
+                })
+                ->when($request->input('programme'), function ($query) use ($request) {
+                    return $query->where('users.programme', $request->input('programme'));
                 })
                 ->when($request->input('year'), function ($query) use ($request) {
                     return $query->where('usersinfo.academicYear_to', $request->input('year'));
@@ -85,7 +95,8 @@ class HomeController extends Controller
         return view('home')->with(['users' => $users,
                                     'years' => $years,
                                     'institutes' => $institutes,
-                                    'interests' => $interests]);
+                                    'interests' => $interests,
+                                    'programmes' => $programmes]);
 
     }
     

@@ -13,6 +13,7 @@
             <input type="hidden" name="institute" value="{{ request()->input('institute') }}">
             <input type="hidden" name="year" value="{{ request()->input('year') }}">
             <input type="hidden" name="interest" value="{{ request()->input('interest') }}">
+            <input type="hidden" name="programme" value="{{ request()->input('programme') }}">
             {{--<input type="hidden" name="gender" value="{{ request()->input('gender') }}">--}}
             {{--<input type="hidden" name="relationship" value="{{ request()->input('relationship') }}">--}}
             {{--<nav aria-label="Page navigation">
@@ -110,6 +111,17 @@
                             </li>
                             <li role="presentation" class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Programme <span class="caret"></span> <span class="label label-default">{{ request()->input('programme') }}</span>
+                                </a>
+                                <ul class="dropdown-menu programme" style="height:auto; max-height:150px; overflow-x:hidden;">
+                                    <li value=""><a href="#">---Reset---</a></li>
+                                    @foreach($programmes as $programme)
+                                        <li value="{{ $programme->id }}"><a href="#">{{ $programme->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     Passout Year <span class="caret"></span> <span class="label label-default">{{ request()->input('year') }}</span>
                                 </a>
                                 <ul class="dropdown-menu year" style="height:auto; max-height:150px; overflow-x:hidden;">
@@ -174,12 +186,21 @@
                 form.find('input[name="alpha"]').val(alpha);
                 form.submit();
             });
-
             $('.institute li').click(function () {
                 var institute = $(this).attr("value");
                 form.find('input[name="institute"]').val(institute);
                 form.submit();
             });
+            if(!$('input[name="institute"]').val()) {
+                $('.programme li').append('<li>You have not selected any Institute</li>');
+            }
+            else{
+                $('.programme li').click(function () {
+                    var programme = $(this).attr("value");
+                    form.find('input[name="programme"]').val(programme);
+                    form.submit();
+                });
+            }
             $('.year li').click(function () {
                 var year = $(this).attr("value");
                 form.find('input[name="year"]').val(year);
