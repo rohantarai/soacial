@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\ContactUsMail;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendActivationEmail;
+use Illuminate\Support\Facades\DB;
 
 class ContactUsController extends Controller
 {
@@ -31,7 +33,15 @@ class ContactUsController extends Controller
 
         $ip = $request->ip();
 
-        Mail::to('champrohan123@gmail.com')->send(new ContactUsMail($request->senderName,$request->senderEmail,$request->subject,$request->messages, $ip));
+        //If the queue is empty then delay is 0 sec.
+        //If the queue has Y items then next item will be delayed by (Y*15) sec, i.e., 15 sec from the last item.
+        //$delay = DB::table('jobs')->count()*15;
+
+        //$queue = (new SendActivationEmail($request->senderName,$request->senderEmail,$request->subject,$request->messages, $ip));
+
+        //$this->dispatch($queue->delay($delay));
+
+        //Mail::send(new ContactUsMail($request->senderName,$request->senderEmail,$request->subject,$request->messages, $ip));
 
         return response()->json([
             'status' => 'success'
