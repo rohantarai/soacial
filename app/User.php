@@ -65,5 +65,12 @@ class User extends Authenticatable
 
         $this->save();
     }
+
+    public function alreadyVerified()
+    {
+        $this->token = null;
+
+        $this->save();
+    }
     
 }
