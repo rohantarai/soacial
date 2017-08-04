@@ -229,8 +229,8 @@
                         </div>
                     </div><!--modal-body-->
                     <div class="modal-footer">
-                        {{--<button class="btn btn-default pull-left" type="button" data-dismiss="modal" style="border-radius:50px">Close</button>--}}
-                        <button class="btn btn-primary pull-left" type="submit" style="border-radius:50px">Submit</button>
+                        <button class="btn btn-primary pull-left" id="passwordFormSubmitBtn" type="submit" style="border-radius:50px">Submit</button>
+                        <button class="btn btn-default pull-left" type="button" data-dismiss="modal" style="border-radius:50px">Close</button>
                     </div>
                 </form>
             </div><!--modal-content-->

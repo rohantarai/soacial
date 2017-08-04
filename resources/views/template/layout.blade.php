@@ -169,13 +169,19 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="contactUs">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="contactForm" method="post" role="form" action="{{ route('contactUs') }}">
+                {{--<form id="contactForm" method="post" role="form" action="">--}}
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">Contact Us</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
+                        <strong>For any queries, Contact here:</strong>
+                        <ul>
+                            <li>champrohan123@gmail.com</li>
+                            <li>+918895133161 (Whatsapp Only)</li>
+                        </ul>
+
+                        {{--<div class="form-group">
                             <label for="senderName" class="control-label">Full Name:</label>
                             <input type="text" name="senderName" class="form-control input-sm" id="senderName" required>
                         </div>
@@ -194,13 +200,13 @@
                         <input type="hidden" value="{{ csrf_token() }}" name="_token">
                         <img src="{{ asset('/img/ajax-loader.gif') }}" id="contactForm-loading-indicator" style="display:none">
                         <div id="contactform-alert">
-                        </div>
+                        </div>--}}
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" id="contactFormSubmitBtn" style="border-radius: 50px;">Send</button>
+                        {{--<button type="submit" class="btn btn-primary" id="contactFormSubmitBtn" style="border-radius: 50px;">Send</button>--}}
                         <button type="button" class="btn btn-default" data-dismiss="modal" style="border-radius: 50px;">Close</button>
                     </div>
-                </form>
+                {{--</form>--}}
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

@@ -237,7 +237,7 @@ $(document).ready(function() {
                     });
                     $('#registerFormSubmitBtn').removeAttr('disabled', 'disabled');
 
-                    grecaptcha.reset(widgetId2);
+                    //grecaptcha.reset(widgetId2);
                 }
             });
         //};
@@ -300,7 +300,7 @@ $(document).ready(function() {
                     });
                     $('#loginFormSubmitBtn').removeAttr('disabled', 'disabled');
 
-                    grecaptcha.reset(widgetId1);
+                    //grecaptcha.reset(widgetId1);
                 }
             },
             error: function (data) {
@@ -328,7 +328,7 @@ $(document).ready(function() {
                 });
                 $('#loginFormSubmitBtn').removeAttr('disabled', 'disabled');
 
-                grecaptcha.reset(widgetId1);
+                //grecaptcha.reset(widgetId1);
             }
         });
     //};
@@ -550,6 +550,8 @@ $(document).ready(function() {
     $('#passwordForm').on('submit', function(e) {
         e.preventDefault();
 
+        $('#passwordFormSubmitBtn').attr('disabled', 'disabled');
+
         $('#password-loading-indicator').show();
         var form = $(this);
         var url = form.prop('action');
@@ -583,8 +585,9 @@ $(document).ready(function() {
                         // z-index style for alert container
                         zIndex: 10400
                     });
+                    $('#passwordFormSubmitBtn').removeAttr('disabled', 'disabled');
 
-                    grecaptcha.reset(widgetId3);
+                    //grecaptcha.reset(widgetId3);
                 }
             },
             error: function (data) {
@@ -609,8 +612,9 @@ $(document).ready(function() {
                         zIndex: 10400
                     });
                 });
+                $('#passwordFormSubmitBtn').removeAttr('disabled', 'disabled');
 
-                grecaptcha.reset(widgetId3);
+                //grecaptcha.reset(widgetId3);
             }
         });
     });
@@ -763,7 +767,7 @@ $(document).ready(function() {
                     $('#contactform-alert').html(errorHtml);
                     $('#contactFormSubmitBtn').removeAttr('disabled', 'disabled');
 
-                    grecaptcha.reset(widgetId4);
+                    //grecaptcha.reset(widgetId4);
                 }
 
             },
@@ -791,7 +795,7 @@ $(document).ready(function() {
                 });
                 $('#contactFormSubmitBtn').removeAttr('disabled', 'disabled');
 
-                grecaptcha.reset(widgetId4);
+                //grecaptcha.reset(widgetId4);
             }
         });
         
