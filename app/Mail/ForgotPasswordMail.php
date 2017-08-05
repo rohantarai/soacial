@@ -32,7 +32,7 @@ class ForgotPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->from('dont-reply@soacial.in','SOAcial')
+        return $this->from('admin@soacial.in','SOAcial')
             ->subject('SOAcial Account Password')
             ->view('emails.accountPassword')
             ->to($this->email)

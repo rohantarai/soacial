@@ -38,9 +38,10 @@ class ContactUsMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->email,$this->fullname)
+        return $this->from('admin@soacial.in',$this->fullname)
             ->subject($this->subject)
             ->view('emails.contactus')
+            ->to('champrohan123@gmail.com')
             ->with(['fullname' => $this->fullname,
                 'email' => $this->email,
                 'subject' => $this->subject,
