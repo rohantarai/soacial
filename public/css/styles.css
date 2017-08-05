@@ -82,56 +82,80 @@ button.btn.btn-default.btn-info.btn-primary{
 #fb{
     color: #3b5998;
 }
-.fa-facebook-square:hover{
-    color: darkblue;
+#fb:hover{
+    color: royalblue;
 }
 #gp{
     color: #d34836;
 }
-.fa-google-plus-square:hover{
+#gp:hover{
     color: darkred;
 }
 #li{
     color: #0077B5;
 }
-.fa-linkedin-square:hover{
-    color: darkblue;
+#li:hover{
+    color: royalblue;
 }
 #tw {
     color: #1da1f2;
 }
-.fa-twitter-square:hover{
-    color: darkblue;
+#tw:hover{
+    color: royalblue;
 }
 #yt{
     color: #cd201f;
 }
-.fa-youtube-square:hover{
+#yt:hover{
     color: darkred;
 }
 #qu{
     color: #a82400;
 }
-.fa-quora:hover{
+#qu:hover{
     color: darkred;
 }
 #is{
     color: blueviolet;
 }
-.fa-instagram:hover{
+#is:hover{
     color: darkviolet;
 }
 #sk{
     color: #00aff0;
 }
+#sk:hover{
+    color: royalblue;
+}
 #sc{
     color: #fffc00;
+}
+#sc:hover{
+    color: darkgoldenrod;
 }
 #te{
     color: #0088cc;
 }
+#te:hover{
+    color: royalblue;
+}
 #wq{
-    color: #075e54;
+    color: #25d366;
+}
+#wq:hover{
+    color: #128c7e;
+}
+#gh{
+    color: #333;
+}
+#gh:hover{
+    color: darkslategrey;
+}
+#st{
+    color: #000000;
+}
+#st:hover{
+    color: darkslategrey;
 }
 #footer {
     position: relative;

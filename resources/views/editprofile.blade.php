@@ -353,6 +353,36 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-1">
+                        <i class="fa fa-github-square fa-3x pull-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" value="{{ $users->usersInfo->github }}" class="form-control" name="Github" id="inputGithub" placeholder="Github">
+                    </div>
+                    <div>
+                        <i class="fa fa-info-circle fa-1x" aria-hidden="true"></i> <small>github.com/<mark>username</mark></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-1">
+                        <i class="fa fa-steam-square fa-3x pull-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" value="{{ $users->usersInfo->steam }}" class="form-control" name="Steam" id="inputSteam" placeholder="Steam">
+                    </div>
+                    <div>
+                        <i class="fa fa-info-circle fa-1x" aria-hidden="true"></i> <small>steamcommunity.com/<mark>profiles/profileid</mark> <strong>OR</strong> www.steamcommunity.com/<mark>id/profileid</mark></small>
+                    </div>
+                </div>
+            </div>
+        </div>
         {{--<div class="form-group">
             <div class="col-md-12">
                 <div class="row">

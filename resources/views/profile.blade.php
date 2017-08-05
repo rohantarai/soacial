@@ -214,6 +214,12 @@
                                         @if($user->usersInfo->whatsapp)
                                             <a id="wq" data-toggle="tooltip" data-placement="bottom" title="{{ $user->usersInfo->whatsapp }}"><i class="fa fa-whatsapp fa-3x" aria-hidden="true"></i></a>
                                         @endif
+                                        @if($user->usersInfo->github)
+                                            <a id="gh" href="{{ url('https://github.com/'.$user->usersInfo->github) }}" target="_blank"><i class="fa fa-github-square fa-3x" aria-hidden="true"></i></a>
+                                        @endif
+                                        @if($user->usersInfo->steam)
+                                            <a id="st" href="{{ url('https://steamcommunity.com/'.$user->usersInfo->steam) }}" target="_blank"><i class="fa fa-steam-square fa-3x" aria-hidden="true"></i></a>
+                                        @endif
                                         {{--<a data-toggle="tooltip" data-placement="bottom" title="{{ $user->email }}" style="color:#d34836;"><i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i></a>--}}
                                     </dd>
                                 </dl>

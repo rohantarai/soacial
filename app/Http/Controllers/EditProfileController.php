@@ -41,7 +41,6 @@ class EditProfileController extends Controller
             'inputHometown'     => 'regex:/^[A-Za-z., -]+$/|max:50',
             'inputYear'         => 'digits:4',
             'inputQuotes'       => 'string|max:2000',
-            /*'inputInterests'    => 'required',*/
             'inputAchievements' => 'string|max:2000',
             'inputAboutMe'      => 'string|max:5000',
             'Facebook'          => 'regex:/^[A-Za-z0-9.]+$/',
@@ -54,7 +53,9 @@ class EditProfileController extends Controller
             'Twitter'           => 'regex:/^[A-Za-z0-9._-]+$/',
             'Whatsapp'          => 'regex:/^[+0-9]+$/|max:13',
             'Youtube'           => 'regex:/^[A-Za-z0-9._\\/-]+$/',
-            'Quora'             => 'regex:/^[A-Za-z0-9._-]+$/',
+            'Github'            => 'regex:/^[A-Za-z0-9._-]+$/',
+            'Steam'             => 'regex:/^[A-Za-z0-9_\\/-]+$/',
+            //'Quora'             => 'regex:/^[A-Za-z0-9._-]+$/',
 
         ],[
             /*'inputFirstName.min'      => 'First Name should be minimum 2 characters',
@@ -102,6 +103,8 @@ class EditProfileController extends Controller
         $user->usersInfo->twitter           = $request->input('Twitter');
         $user->usersInfo->whatsapp          = $request->input('Whatsapp');
         $user->usersInfo->youtube           = $request->input('Youtube');
+        $user->usersInfo->github            = $request->input('Github');
+        $user->usersInfo->steam             = $request->input('Steam');
 
         if(isset($request->inputInterests))
             $user->interests()->sync($request->input('inputInterests'));
