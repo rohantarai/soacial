@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use App\Mail\ConfirmationMail;
-use App\Mail\ForgotPasswordMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Jobs\SendActivationEmail;
+use App\Jobs\SendForgotPasswordMail;
 
 class WelcomeController extends Controller
 {
@@ -99,8 +100,16 @@ class WelcomeController extends Controller
         // For Linux Only
         //chmod(public_path('uploads/avatars/'.$request->input('regdno').'/'), 0776);
 
+        //If the queue is empty then delay is 0 sec.
+        //If the queue has Y items then next item will be delayed by (Y*15) sec, i.e., 15 sec from the last item.
+        $delay = DB::table('jobs')->count()*15;
+
+        $queue = (new SendActivationEmail($user->email,$user->token));
+
+        $this->dispatch($queue->delay($delay));
+
         // send confirmation mail to the newly created user instance object
-        Mail::send(new ConfirmationMail($user->email,$user->token));
+        //Mail::send(new ConfirmationMail($user->email,$user->token));
 
         return response()->json([
             'status' => 'success'
@@ -118,6 +127,9 @@ class WelcomeController extends Controller
 
             // if token is not null then check if verified is true or not
             if ($user_token->verified == 1) {
+
+                //make the token null
+                User::whereToken($token)->first()->alreadyVerified();
 
                 // if verified is true then redirect and return Already Activated message
                 return redirect('/activated')->with('success', 'Already Activated');
@@ -242,7 +254,15 @@ class WelcomeController extends Controller
 
         if($user)
         {
-            Mail::send(new ForgotPasswordMail($user->email,$user->plainPassword));
+            //If the queue is empty then delay is 0 sec.
+            //If the queue has Y items then next item will be delayed by (Y*15) sec, i.e., 15 sec from the last item.
+            $delay = DB::table('jobs')->count()*60;
+
+            $queue = (new SendForgotPasswordMail($user->email,$user->plainPassword));
+
+            $this->dispatch($queue->delay($delay)->onQueue('high'));
+
+            //Mail::send(new ForgotPasswordMail($user->email,$user->plainPassword));
 
             return response()->json([
                 'status' => 'success'
