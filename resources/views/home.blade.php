@@ -192,7 +192,7 @@
                 form.submit();
             });
             if(!$('input[name="institute"]').val()) {
-                $('.programme li').append('<li>You have not selected any Institute</li>');
+                $('.programme li').append('<li>You have not selected any Institute</li>').css('margin-left','15px');
             }
             else{
                 $('.programme li').click(function () {
