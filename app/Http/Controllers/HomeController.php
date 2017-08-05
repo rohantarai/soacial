@@ -62,7 +62,7 @@ class HomeController extends Controller
                 })
                 //join('usersinfo', 'users.reg_no', '=', 'usersinfo.user_regno')
                 //->join('friend_user', 'users.id', '=', 'friend_user.user_id')
-                ->with(['pendingRequests','approvedRequests','institutes','programmes', 'usersInfo' => function ($query) {
+                ->with(['pendingRequests','approvedRequests','institutes','programmes','usersInfo' => function ($query) {
                     $query->select('usersinfo.user_regno', 'usersinfo.academicYear_from', 'usersinfo.academicYear_to', 'usersinfo.avatar');
                 }])
                 ->select('users.id','users.reg_no', 'users.first_name', 'users.last_name', 'users.institute', 'users.programme', 'users.gender','users.created_at','users.verified','usersinfo.academicYear_from')
