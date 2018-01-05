@@ -1,2 +1,2 @@
 # soacial
-a social network for the students of SOA University :)
+a social community for the students of SOA Deemed to be University :)
