@@ -1,5 +1,5 @@
 # SOAcial
-SOAcial is a website, designed for the students of SOA. 
+SOAcial is a website, designed for the students of SOA University
 
 Not only does it help the students to connect with their friends, alumni and faculties, but also facilitates folks from various institutes of SOA to connect with each other for exchanging information.
 
